@@ -45,13 +45,13 @@
 <h2>
 <a name="overview" class="anchor" href="#overview"><span class="octicon octicon-link"></span></a>Overview</h2>
 
-<p>Tapestry is a system that measures network complexity by monitoring DNS
-queries via a series of one or more Openflow enabled network taps in
-front of a recursive DNS server.</p>
+<p>Tapestry is a system that measures network complexity by caputring Domain Name System (DNS)
+endpoint interaction data via OpenFlow enabled network taps in
+front of one or more of an organization's internal recursive DNS servers.</p>
 
-<p>Network complexity information (NCI) is collected over time in an
-internal database and reports can be viewed via a built in Web based
-interface.</p>
+<p>Network interaction data is collected over time, distinct acitivites between are detected
+and a Network Complexity Index (NCI) is computed on-line and can be viewed 
+in near real-time via a built in Web based interface.</p>
 
 <h2>
 <a name="requirements" class="anchor" href="#requirements"><span class="octicon octicon-link"></span></a>Requirements</h2>
@@ -59,8 +59,8 @@ interface.</p>
 <p>Tapestry requires:</p>
 
 <ul>
-<li>A server running erlang to collect and report the NCI data</li>
-<li>One or more DNS servers to collect data from</li>
+<li>One or more servers running the Erlang/OTP distributed computing platform to aggregate the data and calculate the NCI.</li>
+<li>One or more internal recursive DNS servers to provide the raw data feeds</li>
 <li>One or more Open flow enabled Switches or network white boxes with at
 least 3 ports to act as network taps. (or you can install LINC on
 the network white boxes)</li>
