@@ -1,44 +1,36 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Tapestry by FlowForwarding</title>
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-    <script src="javascripts/main.js"></script>
-    <!--[if lt IE 9]>
-      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Tapestry : Tapestry" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Tapestry</title>
   </head>
+
   <body>
 
-      <header>
-        <h1>Tapestry</h1>
-        <p>Tapestry</p>
-      </header>
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/FlowForwarding/tapestry">View on GitHub</a>
 
-      <div id="banner">
-        <span id="logo"></span>
+          <h1 id="project_title">Tapestry</h1>
+          <h2 id="project_tagline">Tapestry</h2>
 
-        <a href="https://github.com/FlowForwarding/tapestry" class="button fork"><strong>View On GitHub</strong></a>
-        <div class="downloads">
-          <span>Downloads:</span>
-          <ul>
-            <li><a href="https://github.com/FlowForwarding/tapestry/zipball/master" class="button">ZIP</a></li>
-            <li><a href="https://github.com/FlowForwarding/tapestry/tarball/master" class="button">TAR</a></li>
-          </ul>
-        </div>
-      </div><!-- end banner -->
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/FlowForwarding/tapestry/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/FlowForwarding/tapestry/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
 
-    <div class="wrapper">
-      <nav>
-        <ul></ul>
-      </nav>
-      <section>
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
         <h1>
 <a name="tapestry-a-network-complexity-analyzer" class="anchor" href="#tapestry-a-network-complexity-analyzer"><span class="octicon octicon-link"></span></a>Tapestry: A Network Complexity Analyzer</h1>
 
@@ -87,7 +79,13 @@ the Erlang/OTP</li>
 <p>If required, download and compile LINC for the network switches</p>
 
 <div class="highlight highlight-bash"><pre>% git clone https://github.com/FlowForwarding/LINC-Switch.git
-You will need to edit <span class="nv">$LINC_ROOT</span>/rel/files/sys.config and <span class="k">then</span>
+</pre></div>
+
+<p>You will need to create <code>$LINC_ROOT/rel/files/sys.config</code> by adding the correspond ports and adding the Tapestry
+Controller.  There are 2 ports needed for Tapestry Controller and hence, we can generate a sys.config somelike below.</p>
+
+<div class="highlight highlight-bash"><pre>% <span class="nb">cd</span> <span class="nv">$LINC_ROOT</span>
+% scripts/config_gen -s 0 eth1 eth2 eth3 eth4 -c tcp:10.10.10.75:6633 tcp:10.10.10.75:6634 -o rel/files/sys.config
 % make compile
 % make rel
 </pre></div>
@@ -149,17 +147,21 @@ receptor for DNS Queries and responses.</p>
 <li>Technical White Paper: “<a href="http://www.flowforwarding.org/nci-article">A Network Complexity Index for Networks of Networks</a>” by Stuart Bailey and Robert L. Grossman</li>
 <li>NCI White Paper: <a href="http://www.infoblox.com/downloads/resources/network-complexity/download">Tapestry for Tracking Network Complexity Index (NCI)</a>
 </li>
-<li>Tapestry <a href="https://github.com/FlowForwarding/tapestry/blob/master/docs/Tapestry.pdf?raw=true">Archicture Details</a>
+<li>Tapestry <a href="https://github.com/FlowForwarding/tapestry/blob/master/docs/Tapestry.pdf?raw=true">Architecture Details</a>
 </li>
 </ol>
 </blockquote>
       </section>
-      <footer>
-        <p>Project maintained by <a href="https://github.com/FlowForwarding">FlowForwarding</a></p>
-        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></small></p>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Tapestry maintained by <a href="https://github.com/FlowForwarding">FlowForwarding</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
       </footer>
     </div>
-    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+
               <script type="text/javascript">
             var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
             document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
@@ -170,6 +172,7 @@ receptor for DNS Queries and responses.</p>
             pageTracker._trackPageview();
             } catch(err) {}
           </script>
+
 
   </body>
 </html>
