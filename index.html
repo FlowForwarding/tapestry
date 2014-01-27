@@ -81,8 +81,8 @@ the Erlang/OTP</li>
 <div class="highlight highlight-bash"><pre>% git clone https://github.com/FlowForwarding/LINC-Switch.git
 </pre></div>
 
-<p>You will need to create <code>$LINC_ROOT/rel/files/sys.config</code> by adding the correspond ports and adding the Tapestry
-Controller.  There are 2 ports needed for Tapestry Controller and hence, we can generate a sys.config somelike below.</p>
+<p>You will need to create <code>$LINC_ROOT/rel/files/sys.config</code> file by adding the correspond ports and adding the Tapestry
+Controller.  There are 2 ports needed for Tapestry Controller and hence, we can generate a sys.config file by running the below command .</p>
 
 <div class="highlight highlight-bash"><pre>% <span class="nb">cd</span> <span class="nv">$LINC_ROOT</span>
 % scripts/config_gen -s 0 eth1 eth2 eth3 eth4 -c tcp:10.10.10.75:6633 tcp:10.10.10.75:6634 -o rel/files/sys.config
