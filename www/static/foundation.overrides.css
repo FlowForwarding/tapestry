@@ -14,12 +14,19 @@
 	font-size:24;
 	font-weight:700;
 	color:black;
+    text-decoration: underline;
 }
 
 .indexValue name{
 	font-size:14;
 	font-weight:500;
 	color: #565656;
+}
+
+.collectorLabel{
+	font-size:16;
+	font-weight:700;	
+	text-decoration: underline;
 }
 
 .indexValue i{

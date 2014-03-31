@@ -8,13 +8,13 @@ if (typeof NCI === 'undefined')
    
 NCI.Emulator = {};  
 NCI.Emulator.liveDataFrequency = 5000; //in mseconds ( 5 second updates)
-NCI.Emulator.dataAvailablePeriod = NCI.chartPeriods.threeyears;  //in mseconds
-NCI.Emulator.dataAvailableTill = NCI.chartPeriods.sixmnth; //time from now in mseconds - last nci value update
+NCI.Emulator.dataAvailablePeriod = NCI.chartPeriods.twoyears;  //in mseconds
+//NCI.Emulator.dataAvailableTill = NCI.chartPeriods.sixmnth; //time from now in mseconds - last nci value update
 NCI.Emulator.serverResponceDelay = 1500;  //in mseconds
 
 NCI.Emulator.startData = new Date();
 
-NCI.Emulator.liveNCIData = function(){
+NCI.Emulator.liveData = function(){
 	// server returns 
 	// {"Time":"2013-11-04T12:54:41Z","NCI":5}
 	// {"Time":"2013-11-04T12:54:41Z","NEP":87}
@@ -22,6 +22,14 @@ NCI.Emulator.liveNCIData = function(){
 	var event = {};
 	event.data = JSON.stringify({Time:  new Date(), NCI: Math.floor((Math.random()*3)+5)});
 	NCI.Connection.onmessage(event);
+	
+	var nepEvent = {};
+	nepEvent.data = JSON.stringify({Time:  new Date(), NEP: Math.floor((Math.random()*40)+5)});
+	NCI.Connection.onmessage(nepEvent);
+	
+	var collectorEvent = {};
+	collectorEvent.data = JSON.stringify({Time:  new Date(), COLLECTORS: Math.floor((Math.random()*200)+5)});
+	NCI.Connection.onmessage(collectorEvent);
 };
 
 //overriders   
@@ -32,7 +40,7 @@ NCI.Connection.startData = function() {
 	event.data = JSON.stringify({start_time: new Date(new Date() - NCI.Emulator.dataAvailablePeriod), 
 		current_time:  new Date()});
 	NCI.Connection.onmessage(event);
-	setInterval(NCI.Emulator.liveNCIData, NCI.Emulator.liveDataFrequency) ;
+	setInterval(NCI.Emulator.liveData, NCI.Emulator.liveDataFrequency) ;
 }; 
 
 NCI.Connection.moreData = function(startTime, endTime, pointsNum) {

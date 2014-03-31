@@ -5,8 +5,8 @@ NCI.start_time; // no data exists on the server before
 NCI.time_adjustment = 0; //difference between client and server time in milliseconds
 NCI.numOfPoints = 200;
 
-//NCI.Connection = new WebSocket("ws://" + location.host + "/clientsock.yaws");
-NCI.Connection = new WebSocket("ws://epamove.herokuapp.com");
+NCI.Connection = new WebSocket("ws://" + location.host + "/clientsock.yaws");
+//NCI.Connection = new WebSocket("ws://epamove.herokuapp.com");
 NCI.Connection.onopen = function () {
 	NCI.Connection.startData();
 };
@@ -79,6 +79,8 @@ NCI.Connection.onmessage  = function (e) {
 			NCI.setQpsLatestValue(NCI.parceNumberForView(data.QPS, 1), NCI.parceDateForLastUpdate(data.Time));
 		if (data.NEP !== undefined)
 			NCI.setNepLatestValue(NCI.parceNumberForView(data.NEP), NCI.parceDateForLastUpdate(data.Time));
+		if (data.COLLECTORS !== undefined)	
+		    NCI.setCollectorsLatestValue(NCI.parceNumberForView(data.COLLECTORS), NCI.parceDateForLastUpdate(data.Time));
 	} else {
 		//we recieve such format:
 		// {"Time":"2013-10-27T13:01:09Z","NCI":99,
