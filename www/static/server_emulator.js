@@ -28,7 +28,17 @@ NCI.Emulator.liveData = function(){
 	NCI.Connection.onmessage(nepEvent);
 	
 	var collectorEvent = {};
-	collectorEvent.data = JSON.stringify({Time:  new Date(), COLLECTORS: Math.floor((Math.random()*200)+5)});
+	var collectors = [];
+	var numOfCollectors = (Math.random()*5)+5;
+	for (var i=0; i<numOfCollectors; i++){
+		collectors.push({
+			name: "Collector" + i,
+			ip: "10.32.3.154",
+			nep: (Math.random()*100)+5,
+			qps: (Math.random()*1000)+5
+		});
+	}
+	collectorEvent.data = JSON.stringify({Time:  new Date(), COLLECTORS: collectors});
 	NCI.Connection.onmessage(collectorEvent);
 };
 

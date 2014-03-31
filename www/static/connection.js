@@ -16,7 +16,7 @@ NCI.lastRedrawTimeVal = new Date();
 
 NCI.Connection.onmessage  = function (e) {
 	var data = eval("tmp = " + e.data );
-	//console.log(e.data);
+
 	if (data.start_time){
 		// to show utc time
 		// NCI.time_adjustment = new Date() - new Date(data.current_time) - new Date().getTimezoneOffset()*1000*60;
@@ -31,9 +31,7 @@ NCI.Connection.onmessage  = function (e) {
 			NCI.Connection.moreData(new Date() - NCI.curChartPeriod, new Date(), NCI.numOfPoints);
 		};
 		return;
-	};
-	
-	if (e.data.length < 60){
+	} else if (e.data.split("NCI").length < 3){
 		var dateVal = new Date(data.Time);
 		if (data.NCI){
 			NCI.lastUpdateTimeVal = dateVal;
@@ -80,7 +78,7 @@ NCI.Connection.onmessage  = function (e) {
 		if (data.NEP !== undefined)
 			NCI.setNepLatestValue(NCI.parceNumberForView(data.NEP), NCI.parceDateForLastUpdate(data.Time));
 		if (data.COLLECTORS !== undefined)	
-		    NCI.setCollectorsLatestValue(NCI.parceNumberForView(data.COLLECTORS), NCI.parceDateForLastUpdate(data.Time));
+		    NCI.setCollectorsLatestValue(data.COLLECTORS, NCI.parceDateForLastUpdate(data.Time));
 	} else {
 		//we recieve such format:
 		// {"Time":"2013-10-27T13:01:09Z","NCI":99,
