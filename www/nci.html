@@ -34,19 +34,26 @@
 					<span id="nciLatestValue"> <val> &nbsp; </val> </span>
 				</div><br>
 			</div>	
-			<div class="large-4 small-12 columns qps-value indexValue" style="padding-top:10px">  	
-				<span class="collectorLabel">Collectors</span>
-				<span data-tooltip class="has-tip" title="Info about collectors"> 
-				<i class="icon-question-sign"></i></span>	
-				<span id="collectorsLatestValue"><val> &nbsp; </val> <br> <i>&nbsp;</i> </span>	<br> <br>
-				<name>Endpoints</name>
-				<span data-tooltip class="has-tip" title="Number of Connected Network Elements"> 
-				<i class="icon-question-sign"></i></span>	
-				<span id="nepLatestValue"><val> &nbsp; </val> <br> <i>&nbsp;</i> </span>	<br> <br>
-				<name>Queries per Second </name>
-				<span data-tooltip class="has-tip" title="Successful DNS Query Responses per Second">
-				<i class="icon-question-sign"></i></span>
-				<span id="qpsLatestValue"><val> &nbsp; </val> <br> <i>&nbsp;</i> </span>
+			<div class="large-4 small-12 columns" style="padding-top:10px"> 
+				<div class="indexValue qps-value" 
+				data-reveal-id="collectorsInfo" class="round-info" data-reveal> 	
+				    <span class="collectorLabel">Collectors</span>
+				    <span data-tooltip class="has-tip" title="Info about collectors"> 
+				    <i class="icon-question-sign"></i></span>	
+				    <span id="collectorsLatestValue"><val> &nbsp; </val> <br> <i>&nbsp;</i> </span>	<br> <br>
+			    </div>
+				<div class="indexValue qps-value">
+				    <name>Endpoints</name>
+				    <span data-tooltip class="has-tip" title="Number of Connected Network Elements"> 
+				    <i class="icon-question-sign"></i></span>	
+				    <span id="nepLatestValue"><val> &nbsp; </val> <br> <i>&nbsp;</i> </span>	<br> <br>
+				</div>
+				<div class="indexValue qps-value">
+				    <name>Queries per Second </name>
+				    <span data-tooltip class="has-tip" title="Successful DNS Query Responses per Second">
+				    <i class="icon-question-sign"></i></span>
+				    <span id="qpsLatestValue"><val> &nbsp; </val> <br> <i>&nbsp;</i> </span>
+				</div>
 			</div>	
 			<div class="large-4 small-2 columns">
 				
@@ -75,6 +82,8 @@
 			<a href='http://www.flowforwarding.org/about-us' target='blank'>About FlowForwarding.Org</a>
 			<a class="close-reveal-modal">&#215;</a>
 		</div>
+		
+		<div id="collectorsInfo" class="reveal-modal" data-reveal></div>	
 		
 		<script src='static/libs/jquery/jquery.min.js'></script>
 		<script src="static/libs/foundation/fastclick.js"></script>

@@ -12,6 +12,7 @@ NCI.ifMobile = function(){
 };
 
 NCI.currentNCI = 0;
+NCI.collectors = [];
 
 NCI.setNciLatestValue = function (val, time) {
 	
@@ -30,7 +31,9 @@ NCI.setQpsLatestValue = function (newVal, time) {
 	NCI.qpsLatestValue.html('<val>' + newVal + '</val> <br><i>updated &nbsp;' + time + '</i>');
 };
 
-NCI.setCollectorsLatestValue = function (newVal, time) {
+NCI.setCollectorsLatestValue = function (collectors, time) {
+	var newVal = NCI.parceNumberForView(collectors.length);
+	NCI.collectors = collectors;
 	NCI.collectorsLatestValue.html('<val>' + newVal + '</val> <br><i>updated &nbsp;' + time + '</i>');
 };
 
@@ -104,6 +107,18 @@ NCI.zoomLinks = (function(){
 	return me;
 }());
 
+$(document).on('open', '#collectorsInfo', function () {
+	var content = "<div class='row'><table style='margin-left: auto;margin-right: auto;'><thead><tr><th width='150'>Collector</th><th>IP Address</th><th width='150'>Endpoints</th><th width='150'>QPS</th></tr></thead><tbody>";
+    $.each(NCI.collectors, function(index, value){
+    	content += "<tr><td>" +  value.name + "</td><td>" +  
+		value.ip + "</td><td>" +  NCI.parceNumberForView(value.nep) + "</td><td>" +  
+		NCI.parceNumberForView(value.qps) + "</td></tr>";
+    });
+    content += "</tbody></table></div>";
+	var modal = $(this).html(content);
+	modal.height(400);
+	//console.log(modal.height);
+});
 
 $('body').on('touchend', function(){
 	$('.tooltip').hide();
