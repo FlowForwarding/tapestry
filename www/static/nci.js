@@ -4,6 +4,7 @@ if (typeof NCI === 'undefined')
 NCI.nciLatestValue = $('#nciLatestValue');
 NCI.nepLatestValue = $('#nepLatestValue');
 NCI.qpsLatestValue = $('#qpsLatestValue');
+NCI.collectorsLatestValue = $('#collectorsLatestValue');
 NCI.lastUpdateTime = $('#lastUpdateTime');
 
 NCI.ifMobile = function(){
@@ -23,12 +24,14 @@ NCI.setNciLatestValue = function (val, time) {
 
 NCI.setNepLatestValue = function (newVal, time) {
 	NCI.nepLatestValue.html('<val>' + newVal + '</val><br><i>updated &nbsp;' + time + '</i>');
-	NCI.lastUpdateTime.html('updated &nbsp;' + time);
 };
 
 NCI.setQpsLatestValue = function (newVal, time) {
 	NCI.qpsLatestValue.html('<val>' + newVal + '</val> <br><i>updated &nbsp;' + time + '</i>');
-	NCI.lastUpdateTime.html('updated &nbsp;' + time);
+};
+
+NCI.setCollectorsLatestValue = function (newVal, time) {
+	NCI.collectorsLatestValue.html('<val>' + newVal + '</val> <br><i>updated &nbsp;' + time + '</i>');
 };
 
 NCI.convertDateForServer = function(date){
