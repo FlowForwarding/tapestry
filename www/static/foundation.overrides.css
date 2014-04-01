@@ -15,11 +15,21 @@
 	margin-top:20px !important;
 }
 
+.nci-label, .qps-value {
+	padding-top:15px;
+}
+
 .nci-label .indexValue name{
 	font-size:24;
 	font-weight:700;
 	color:black;
     text-decoration: underline;
+}
+
+.nci-label val{
+	font-size: 32px;
+	font-weight: 700;
+	padding-left: 20px;;
 }
 
 .indexValue name{
@@ -44,12 +54,6 @@
 	left: 190px;
 	font-weight:500;
 	font-size:16;
-}
-
-.nci-label val{
-	font-size: 32px;
-	font-weight: 700;
-	padding-left: 20px;;
 }
 
 .icon-question-sign{
@@ -116,5 +120,9 @@
 }
 
 
-
+#nciHistogram .dygraph-legend {
+        transform: rotate(90deg) rotateX(180deg) translateX(0.5px) translateY(0.5px);
+        -ms-transform: rotate(90deg) rotateX(180deg) translateX(0.5px) translateY(0.5px);
+        -webkit-transform: rotate(90deg) rotateX(180deg) translateX(0.5px) translateY(0.5px);
+}
 
