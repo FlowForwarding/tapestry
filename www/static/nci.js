@@ -13,6 +13,7 @@ NCI.ifMobile = function(){
 
 NCI.currentNCI = 0;
 NCI.collectors = [];
+NCI.collectorsUpdateDate = "";
 
 NCI.setNciLatestValue = function (val, time) {
 	
@@ -34,6 +35,7 @@ NCI.setQpsLatestValue = function (newVal, time) {
 NCI.setCollectorsLatestValue = function (collectors, time) {
 	var newVal = NCI.parceNumberForView(collectors.length);
 	NCI.collectors = collectors;
+	NCI.collectorsUpdateDate =  time;
 	NCI.collectorsLatestValue.html('<val>' + newVal + '</val> <br><i>updated &nbsp;' + time + '</i>');
 };
 
@@ -111,6 +113,7 @@ NCI.collectorsTable = (function(){
 	var me = $('#collectorsInfo');
 	var table = me.find("#collectorsTableBody");
 	var pagination = me.find("#collectorsPagination");
+	var collectorsgeneral = me.find(".collectorsGeneral");
 	var numOnPage = 10;
 	var collectors = [];
 	var pages = [];
@@ -136,6 +139,7 @@ NCI.collectorsTable = (function(){
 	});
 	
 	me.fillData = function(collectorsArray){
+		collectorsgeneral.html(collectorsArray.length + " collectors at " + NCI.collectorsUpdateDate);
 		collectors = [].concat(collectorsArray);
 		
 	  // this is dots
@@ -232,7 +236,7 @@ $(document).on('opened', '#nciDetails', function () {
 
 $(document).on('open', '#collectorsInfo', function () {
 	var modal = $(this);
-	modal.height(440);
+	modal.height(470);
 	NCI.collectorsTable.fillData(NCI.collectors);
 });
 

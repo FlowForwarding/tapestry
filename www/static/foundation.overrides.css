@@ -8,6 +8,7 @@
 .centrate{
 	margin-left: auto !important;
 	margin-right: auto;
+	display: table !important;
 }
 
 /*override dygraph styles, to show xAxes values better*/
