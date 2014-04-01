@@ -169,6 +169,67 @@ NCI.collectorsTable = (function(){
 	return me;
 }());
 
+function barChartPlotter(e) {
+  var ctx = e.drawingContext;
+  var points = e.points;
+  var y_bottom = e.dygraph.toDomYCoord(0);
+
+  // The RGBColorParser class is provided by rgbcolor.js, which is
+  // packed in with dygraphs.
+  var color = new RGBColorParser(e.color);
+  color.r = Math.floor((255 + color.r) / 2);
+  color.g = Math.floor((255 + color.g) / 2);
+  color.b = Math.floor((255 + color.b) / 2);
+  ctx.fillStyle = color.toRGB();
+
+  // Find the minimum separation between x-values.
+  // This determines the bar width.
+  var min_sep = Infinity;
+  for (var i = 1; i < points.length; i++) {
+    var sep = points[i].canvasx - points[i - 1].canvasx;
+    if (sep < min_sep) min_sep = sep;
+  }
+  var bar_width = Math.floor(2.0 / 3 * min_sep);
+
+  // Do the actual plotting.
+  for (var i = 0; i < points.length; i++) {
+    var p = points[i];
+    var center_x = p.canvasx;
+
+    ctx.fillRect(center_x - bar_width / 2, p.canvasy,
+        bar_width, y_bottom - p.canvasy);
+
+    ctx.strokeRect(center_x - bar_width / 2, p.canvasy,
+        bar_width, y_bottom - p.canvasy);
+  }
+}
+
+$(document).on('opened', '#nciDetails', function () {
+    // set rotation and position of dygraph div
+	//width:400px;height:300px
+	var dygraph_height = 300;
+	var dygraph_width = 300;
+    var dygraph_transform = 'rotate(90deg) rotateX(180deg) translateX(' + (dygraph_height - dygraph_width)/2 + 'px) translateY(' + (dygraph_width - dygraph_height)/2 + 'px)';
+    $("#nciHistogram").css({
+            transform: dygraph_transform,
+            msTransform: dygraph_transform,
+            webkitTransform: dygraph_transform
+    });
+	NCI.histogram = new Dygraph(
+		 document.getElementById("nciHistogram"),
+		 [[1,4], [2,4],  [3,5], [4,6], [5, 8], [6, 9]],
+		 {
+			 dateWindow: [0, 7],
+			 drawGrid: false,
+			 drawXAxis: false,
+			 drawYAxis: false,
+			 width: dygraph_width,
+			 height: dygraph_height,
+		     plotter: barChartPlotter
+	     }
+	);
+});
+
 $(document).on('open', '#collectorsInfo', function () {
 	var modal = $(this);
 	modal.height(440);

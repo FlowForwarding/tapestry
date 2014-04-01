@@ -28,25 +28,25 @@
 		
 		<div class="row">
 			<div class="large-4 small-12 columns nci-label">
-				<div class="indexValue" style="padding-top:10px">
+				<div class="indexValue" data-reveal-id="nciDetails" class="reveal-modal">
 					<name> NCI</name>
 					<span data-tooltip class="has-tip" title="Network Complexity Index"><i class="icon-question-sign"></i></span>
 					<span id="nciLatestValue"> <val> &nbsp; </val> </span>
 				</div><br>
 			</div>	
-			<div class="large-4 small-12 columns" style="padding-top:10px"> 
+			<div class="large-4 small-12 columns"> 
 				<div class="indexValue qps-value" 
 				data-reveal-id="collectorsInfo" class="round-info" data-reveal> 	
 				    <span class="collectorLabel">Collectors</span>
 				    <span data-tooltip class="has-tip" title="Info about collectors"> 
 				    <i class="icon-question-sign"></i></span>	
-				    <span id="collectorsLatestValue"><val> &nbsp; </val> <br> <i>&nbsp;</i> </span>	<br> <br>
+				    <span id="collectorsLatestValue"><val> &nbsp; </val> <br> <i>&nbsp;</i> </span>
 			    </div>
 				<div class="indexValue qps-value">
 				    <name>Endpoints</name>
 				    <span data-tooltip class="has-tip" title="Number of Connected Network Elements"> 
 				    <i class="icon-question-sign"></i></span>	
-				    <span id="nepLatestValue"><val> &nbsp; </val> <br> <i>&nbsp;</i> </span>	<br> <br>
+				    <span id="nepLatestValue"><val> &nbsp; </val> <br> <i>&nbsp;</i> </span>
 				</div>
 				<div class="indexValue qps-value">
 				    <name>Queries per Second </name>
@@ -101,6 +101,29 @@
 			</div>
 		</div>	
 		
+		<div id="nciDetails" class="reveal-modal" data-reveal>
+			<div class="row">
+				<div class="large-6 columns">
+					<h4><b>The NETWORK COMPLEXITY INDEX</b></h4>
+					<div class="row">
+						<div class="large-2 columns">
+							<b>(NCI)</b>
+						</div>
+						<div class="large-10 columns">
+							<b>The BALANCE POINT</b><br/><br/>
+							between<br/>
+							the SIZE of network activities<br/>
+							and<br/>
+							the NUMBER network activities
+						</div>
+					</div>	
+				</div>	
+				<div class="large-6 columns">
+			        <div id="nciHistogram"></div>
+				</div>
+			</div>
+		</div>	
+		
 		<script src='static/libs/jquery/jquery.min.js'></script>
 		<script src="static/libs/foundation/fastclick.js"></script>
 		<script src='static/libs/dygraph/dygraph-combined.js'></script>	
@@ -108,7 +131,7 @@
 		<script src='static/connection.js'></script>
 		<script src='static/nci.js'></script>
 		<script src='static/chart.js'></script>
-		<script src='static/server_emulator.js'></script>
+		<!--script src='static/server_emulator.js'></script-->
 		<script type="text/javascript">
 		    	$(document).foundation();
 		</script>
