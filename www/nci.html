@@ -83,7 +83,23 @@
 			<a class="close-reveal-modal">&#215;</a>
 		</div>
 		
-		<div id="collectorsInfo" class="reveal-modal" data-reveal></div>	
+		<div id="collectorsInfo" class="reveal-modal" data-reveal>
+			<div class='row'>
+				<table class='centrate'>
+					<thead>
+						<tr><th width='150'>Collector</th>
+							<th>IP Address</th>
+							<th width='150'>Endpoints</th>
+							<th width='150'>QPS</th>
+						</tr>
+					</thead>
+					<tbody id="collectorsTableBody">
+				    </tbody>
+				</table>
+				<ul id="collectorsPagination" class="pagination centrate" style="display: table !important;">
+				</ul>
+			</div>
+		</div>	
 		
 		<script src='static/libs/jquery/jquery.min.js'></script>
 		<script src="static/libs/foundation/fastclick.js"></script>
@@ -92,7 +108,7 @@
 		<script src='static/connection.js'></script>
 		<script src='static/nci.js'></script>
 		<script src='static/chart.js'></script>
-		<!--script src='static/server_emulator.js'></script-->
+		<script src='static/server_emulator.js'></script>
 		<script type="text/javascript">
 		    	$(document).foundation();
 		</script>

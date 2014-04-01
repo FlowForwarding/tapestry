@@ -107,17 +107,72 @@ NCI.zoomLinks = (function(){
 	return me;
 }());
 
+NCI.collectorsTable = (function(){
+	var me = $('#collectorsInfo');
+	var table = me.find("#collectorsTableBody");
+	var pagination = me.find("#collectorsPagination");
+	var numOnPage = 10;
+	var collectors = [];
+	var pages = [];
+	var currentPage;
+	
+	me.showDataForPage = function(page){
+		var lastIndex = numOnPage*page  > collectors.length ? collectors.length : numOnPage*page;
+		var content = "";
+	    for (var i = numOnPage*(page-1); i< lastIndex; i++){
+	   	    var collectorInfo = collectors[i];
+			content += "<tr><td>" +  collectorInfo.name + "</td><td>" +  
+			collectorInfo.ip + "</td><td>" +  NCI.parceNumberForView(collectorInfo.nep) + "</td><td>" +  
+			NCI.parceNumberForView(collectorInfo.qps) + "</td></tr>";
+		};
+		table.html(content);
+	};
+	
+	me.on('click', '.pager', function(){
+		me.showDataForPage(this.dataset.page)
+		currentPage.removeClass("current");
+		currentPage = $(this);
+		currentPage.addClass("current");
+	});
+	
+	me.fillData = function(collectorsArray){
+		collectors = [].concat(collectorsArray);
+		
+	  // this is dots
+	  // <li class="unavailable"><a href="">&hellip;</a></li>
+		
+		var pageCount = collectors.length/numOnPage;
+		if (pageCount > 1) {
+			if (pageCount > Math.round(pageCount)) {
+				pageCount = Math.round(pageCount) + 1;
+			} else {
+				pageCount = Math.round(pageCount);
+			}
+			var paginationContent = "<li class='arrow unavailable'><a>&laquo;</a></li>"
+			for (var i = 0; i < pageCount; i++){
+				paginationContent += '<li class="pager" data-page="' + (i + 1) + '"><a>' + (i + 1) + '</a></li>';
+			}
+			paginationContent += "<li class='arrow'><a>&raquo;</a></li>"
+			pagination.html(paginationContent);
+		} else {
+			pagination.html("");
+		}
+		pages = pagination.find("li");
+		me.showDataForPage(1);
+		if (pages.length > 0){
+			currentPage = $(pages[1]);
+			currentPage.addClass("current");	
+		}
+
+	}
+	
+	return me;
+}());
+
 $(document).on('open', '#collectorsInfo', function () {
-	var content = "<div class='row'><table style='margin-left: auto;margin-right: auto;'><thead><tr><th width='150'>Collector</th><th>IP Address</th><th width='150'>Endpoints</th><th width='150'>QPS</th></tr></thead><tbody>";
-    $.each(NCI.collectors, function(index, value){
-    	content += "<tr><td>" +  value.name + "</td><td>" +  
-		value.ip + "</td><td>" +  NCI.parceNumberForView(value.nep) + "</td><td>" +  
-		NCI.parceNumberForView(value.qps) + "</td></tr>";
-    });
-    content += "</tbody></table></div>";
-	var modal = $(this).html(content);
-	modal.height(400);
-	//console.log(modal.height);
+	var modal = $(this);
+	modal.height(440);
+	NCI.collectorsTable.fillData(NCI.collectors);
 });
 
 $('body').on('touchend', function(){
