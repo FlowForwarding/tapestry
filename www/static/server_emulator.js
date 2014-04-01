@@ -29,7 +29,7 @@ NCI.Emulator.liveData = function(){
 	
 	var collectorEvent = {};
 	var collectors = [];
-	var numOfCollectors = (Math.random()*5)+5;
+	var numOfCollectors = (Math.random()*30)+1;
 	for (var i=0; i<numOfCollectors; i++){
 		collectors.push({
 			name: "Collector" + i,

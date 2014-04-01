@@ -5,6 +5,11 @@
 	width: 100%;
 }
 
+.centrate{
+	margin-left: auto !important;
+	margin-right: auto;
+}
+
 /*override dygraph styles, to show xAxes values better*/
 .dygraph-rangesel-fgcanvas, .dygraph-rangesel-bgcanvas{
 	margin-top:20px !important;
