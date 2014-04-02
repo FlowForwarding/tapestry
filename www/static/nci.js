@@ -210,26 +210,28 @@ function barChartPlotter(e) {
 
 $(document).on('opened', '#nciDetails', function () {
     // set rotation and position of dygraph div
-	//width:400px;height:300px
 	var dygraph_height = 300;
 	var dygraph_width = 300;
-    var dygraph_transform = 'rotate(90deg) rotateX(180deg) translateX(' + (dygraph_height - dygraph_width)/2 + 'px) translateY(' + (dygraph_width - dygraph_height)/2 + 'px)';
+    var dygraph_transform = 'rotate(-90deg) translateX(' + (dygraph_height - dygraph_width)/2 + 'px) translateY(' + (dygraph_width - dygraph_height)/2 + 'px)';
     $("#nciHistogram").css({
-            transform: dygraph_transform,
-            msTransform: dygraph_transform,
-            webkitTransform: dygraph_transform
+		transform: dygraph_transform,
+		msTransform: dygraph_transform,
+		webkitTransform: dygraph_transform
     });
 	NCI.histogram = new Dygraph(
 		 document.getElementById("nciHistogram"),
-		 [[1,4], [2,4],  [3,5], [4,6], [5, 8], [6, 9]],
+		 [[1, 9], [2, 8], [3,6], [4,5], [5,4], [6,4] ],
 		 {
+			 ylabel: 'ENDPOINTS',
+			 xlabel: 'ACTIVITIES',
+			 labels: ['Activity', 'Endpoints'],
 			 dateWindow: [0, 7],
 			 drawGrid: false,
-			 drawXAxis: false,
-			 drawYAxis: false,
+			 axisLineWidth: 0,
 			 width: dygraph_width,
 			 height: dygraph_height,
-		     plotter: barChartPlotter
+		     plotter: barChartPlotter,
+			 axisLineWidth: 0.1
 	     }
 	);
 });
