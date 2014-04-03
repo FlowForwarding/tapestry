@@ -35,7 +35,7 @@ NCI.Connection.onmessage  = function (e) {
 		var dateVal = new Date(data.Time);
 		if (data.NCI){
 			NCI.lastUpdateTimeVal = dateVal;
-			NCI.setNciLatestValue(data.NCI, NCI.parceDateForLastUpdate(data.Time));
+			NCI.setNciLatestValue(data.NCI, NCI.parceDateForLastUpdate(data.Time), data.activities);
 			if (!NCI.chart){
 				 NCI.initChart(new Date(data.Time) - NCI.time_adjustment);
 			} else {

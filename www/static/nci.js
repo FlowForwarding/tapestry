@@ -14,9 +14,12 @@ NCI.ifMobile = function(){
 NCI.currentNCI = 0;
 NCI.collectors = [];
 NCI.collectorsUpdateDate = "";
+NCI.nciUpdateDate = "";
+NCI.nciActivities = [];
 
-NCI.setNciLatestValue = function (val, time) {
-	
+NCI.setNciLatestValue = function (val, time, activities) {
+	NCI.nciUpdateDate = time;
+	NCI.nciActivities = activities;
 	var colorClass = val > NCI.currentNCI ? 'green' : val == NCI.currentNCI ? 'black' : 'red';
 	NCI.currentNCI = val;
 	var newVal = NCI.parceNumberForView(val);
@@ -208,32 +211,54 @@ function barChartPlotter(e) {
   }
 }
 
+NCI.nciHistogram = (function(){
+	var me = $('#nciDetails');
+	
+	var activities = [];
+	//var activitiesFormatted = [];
+	
+	me.show = function(){
+		activities = [].concat(NCI.nciActivities);
+		var graphData = [];
+		$.each(activities, function(index, value){
+			graphData.push([value.size, value.endpoints]);
+		});
+		var dygraph_height = 300;
+		var dygraph_width = 300;
+	    var dygraph_transform = 'rotate(-90deg)';
+	    $("#nciHistogram").css({
+			transform: dygraph_transform,
+			msTransform: dygraph_transform,
+			webkitTransform: dygraph_transform
+	    });
+		NCI.histogram = new Dygraph(
+			 document.getElementById("nciHistogram"),
+			 graphData,
+			 {
+				 ylabel: 'ENDPOINTS',
+				 xlabel: 'ACTIVITIES',
+				 labels: ['Activity', 'Endpoints'],
+				 dateWindow: [graphData[0][0] - 1, graphData[graphData.length - 1][0] + 1],
+				 clickCallback:  function(e, x, points){
+				    console.log(x);
+					console.log(points);	
+				 },
+				 showLabelsOnHighlight: false,
+				 drawGrid: false,
+				 axisLineWidth: 0,
+				 width: dygraph_width,
+				 height: dygraph_height,
+			     plotter: barChartPlotter,
+				 axisLineWidth: 0.1
+		     }
+		);
+	};
+	
+	return me;
+}());
+
 $(document).on('opened', '#nciDetails', function () {
-    // set rotation and position of dygraph div
-	var dygraph_height = 300;
-	var dygraph_width = 300;
-    var dygraph_transform = 'rotate(-90deg) translateX(' + (dygraph_height - dygraph_width)/2 + 'px) translateY(' + (dygraph_width - dygraph_height)/2 + 'px)';
-    $("#nciHistogram").css({
-		transform: dygraph_transform,
-		msTransform: dygraph_transform,
-		webkitTransform: dygraph_transform
-    });
-	NCI.histogram = new Dygraph(
-		 document.getElementById("nciHistogram"),
-		 [[1, 9], [2, 8], [3,6], [4,5], [5,4], [6,4] ],
-		 {
-			 ylabel: 'ENDPOINTS',
-			 xlabel: 'ACTIVITIES',
-			 labels: ['Activity', 'Endpoints'],
-			 dateWindow: [0, 7],
-			 drawGrid: false,
-			 axisLineWidth: 0,
-			 width: dygraph_width,
-			 height: dygraph_height,
-		     plotter: barChartPlotter,
-			 axisLineWidth: 0.1
-	     }
-	);
+	NCI.nciHistogram.show();
 });
 
 $(document).on('open', '#collectorsInfo', function () {

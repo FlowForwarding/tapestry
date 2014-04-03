@@ -121,11 +121,11 @@
 }
 
 
-#nciHistogram .dygraph-legend {
+/*#nciHistogram .dygraph-legend {
         transform: rotate(90deg)  translateX(0.5px) translateY(0.5px);
         -ms-transform: rotate(90deg)  translateX(0.5px) translateY(0.5px);
         -webkit-transform: rotate(90deg) translateX(0.5px) translateY(0.5px);
-}
+}*/
 
 #nciHistogram>div>div, #nciHistogram .dygraph-ylabel{
         transform: rotate(90deg);

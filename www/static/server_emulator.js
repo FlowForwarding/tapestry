@@ -20,12 +20,30 @@ NCI.Emulator.liveData = function(){
 	// {"Time":"2013-11-04T12:54:41Z","NEP":87}
 	// {"Time":"2013-11-04T12:54:16Z","QPS":16.451612903225808} 
 	var event = {};
-	event.data = JSON.stringify({Time:  new Date(), NCI: Math.floor((Math.random()*3)+5)});
+	var nciValue = Math.floor((Math.random()*3)+5);
+	var activities = [];
+	var numOfActivities = nciValue + Math.floor((Math.random()*3)+2);
+	for (var i=0; i<numOfActivities; i++){
+		activities.push({
+			name: "Activity " + i + " name", 
+			size: i+1, 
+			endpoints: i+1,
+			details: "activity " + i +  " details"
+		});
+	};
+	event.data = JSON.stringify({Time:  new Date(), 
+		NCI: Math.floor((Math.random()*3)+5),
+		activities: activities
+	});
 	NCI.Connection.onmessage(event);
 	
 	var nepEvent = {};
 	nepEvent.data = JSON.stringify({Time:  new Date(), NEP: Math.floor((Math.random()*40)+5)});
 	NCI.Connection.onmessage(nepEvent);
+	
+	var qpsEvent = {};
+	qpsEvent.data = JSON.stringify({Time:  new Date(), QPS: Math.floor((Math.random()*40)+5)});
+	NCI.Connection.onmessage(qpsEvent);
 	
 	var collectorEvent = {};
 	var collectors = [];
