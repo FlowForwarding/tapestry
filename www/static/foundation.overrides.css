@@ -121,21 +121,30 @@
 }
 
 
-/*#nciHistogram .dygraph-legend {
-        transform: rotate(90deg)  translateX(0.5px) translateY(0.5px);
-        -ms-transform: rotate(90deg)  translateX(0.5px) translateY(0.5px);
-        -webkit-transform: rotate(90deg) translateX(0.5px) translateY(0.5px);
+#nciHistogram div {
+  font: 10px sans-serif;
+  background-color: steelblue;
+  text-align: right;
+  padding: 3px;
+  margin: 2px;
+  color: white;
+  height: 20px;
+  margin-left: auto;
+}
+
+.axis path, .axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+/*.axis text {
+  font: 10px sans-serif;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
 }*/
-
-#nciHistogram>div>div, #nciHistogram .dygraph-ylabel{
-        transform: rotate(90deg);
-        -ms-transform: rotate(90deg);
-        -webkit-transform: rotate(90deg);
-}
-
-#nciHistogram .dygraph-xlabel{
-    transform: rotate(-90deg) ;
-    -ms-transform: rotate(-90deg) ;
-    -webkit-transform: rotate(-90deg) ;
-}
-

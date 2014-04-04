@@ -176,89 +176,79 @@ NCI.collectorsTable = (function(){
 	return me;
 }());
 
-function barChartPlotter(e) {
-  var ctx = e.drawingContext;
-  var points = e.points;
-  var y_bottom = e.dygraph.toDomYCoord(0);
-
-  // The RGBColorParser class is provided by rgbcolor.js, which is
-  // packed in with dygraphs.
-  var color = new RGBColorParser(e.color);
-  color.r = Math.floor((255 + color.r) / 2);
-  color.g = Math.floor((255 + color.g) / 2);
-  color.b = Math.floor((255 + color.b) / 2);
-  ctx.fillStyle = color.toRGB();
-
-  // Find the minimum separation between x-values.
-  // This determines the bar width.
-  var min_sep = Infinity;
-  for (var i = 1; i < points.length; i++) {
-    var sep = points[i].canvasx - points[i - 1].canvasx;
-    if (sep < min_sep) min_sep = sep;
-  }
-  var bar_width = Math.floor(2.0 / 3 * min_sep);
-
-  // Do the actual plotting.
-  for (var i = 0; i < points.length; i++) {
-    var p = points[i];
-    var center_x = p.canvasx;
-
-    ctx.fillRect(center_x - bar_width / 2, p.canvasy,
-        bar_width, y_bottom - p.canvasy);
-
-    ctx.strokeRect(center_x - bar_width / 2, p.canvasy,
-        bar_width, y_bottom - p.canvasy);
-  }
-}
-
 NCI.nciHistogram = (function(){
 	var me = $('#nciDetails');
 	
 	var activities = [];
-	//var activitiesFormatted = [];
+	var histogramGeneral = $("#histogramGeneral");
 	
 	me.show = function(){
-		activities = [].concat(NCI.nciActivities);
-		var graphData = [];
-		$.each(activities, function(index, value){
-			graphData.push([value.size, value.endpoints]);
-		});
-		var dygraph_height = 300;
-		var dygraph_width = 300;
-	    var dygraph_transform = 'rotate(-90deg)';
-	    $("#nciHistogram").css({
-			transform: dygraph_transform,
-			msTransform: dygraph_transform,
-			webkitTransform: dygraph_transform
-	    });
-		NCI.histogram = new Dygraph(
-			 document.getElementById("nciHistogram"),
-			 graphData,
-			 {
-				 ylabel: 'ENDPOINTS',
-				 xlabel: 'ACTIVITIES',
-				 labels: ['Activity', 'Endpoints'],
-				 dateWindow: [graphData[0][0] - 1, graphData[graphData.length - 1][0] + 1],
-				 clickCallback:  function(e, x, points){
-				    console.log(x);
-					console.log(points);	
-				 },
-				 showLabelsOnHighlight: false,
-				 drawGrid: false,
-				 axisLineWidth: 0,
-				 width: dygraph_width,
-				 height: dygraph_height,
-			     plotter: barChartPlotter,
-				 axisLineWidth: 0.1
-		     }
-		);
+		$("#nciHistogram").text('');
+		histogramGeneral.html("<b>The NETWORK COMPLEXITY INDEX at &nbsp;&nbsp;</b> <i>" + NCI.nciUpdateDate + "</i>" );
+	    activities = [].concat(NCI.nciActivities);
+		
+		var scale = 30;
+		
+		var chart = d3.select("#nciHistogram");
+
+		var margin = {top: 40, right: 40, bottom: 40, left:40},
+		    width = 600,
+		    height = 300;
+
+		var x = d3.scale.linear()
+		    .domain([0, d3.max(activities, function(d) { return d.endpoints; })])
+		    .range([width - margin.left - margin.right, 0]);
+
+		var y = d3.scale.linear()
+		    .domain([0, d3.max(activities, function(d) { return d.size; })])
+		    .range([height - margin.top - margin.bottom, 0]);
+
+		var xAxis = d3.svg.axis()
+		    .scale(x)
+		    .orient('bottom')
+		    .tickSize(0)
+		    .tickPadding(8);
+
+		var yAxis = d3.svg.axis()
+		    .scale(y)
+		    .orient('right')
+			.tickSize(0)
+		    .tickPadding(8);
+
+		var svg = chart.append('svg')
+		    .attr('class', 'chart')
+		    .attr('width', width)
+		    .attr('height', height)
+		    .append('g')
+		    .attr('transform', 'translate(' + margin.left + ', ' + margin.top + ')');
+
+		svg.selectAll('#nciHistogramss')
+		    .data(activities)
+		    .enter().append('rect')
+		    .attr('class', 'bar')
+		    .attr('x', function(d) { return  width - margin.left - margin.right - x(d.endpoints) })
+		    .attr('y', function(d) { return  y(d.size)})
+		    .attr('width', function(d) { return  x(d.endpoints)})
+		    .attr('height', 18)
+
+		svg.append('g')
+		    .attr('class', 'x axis')
+		    .attr('transform', 'translate(0, ' + (height - margin.top - margin.bottom) + ')')
+		    .call(xAxis);
+
+		svg.append('g')
+		  .attr('class', 'y axis')
+		  .attr('transform', 'translate(' + (width - margin.right - margin.left) + ')')
+		  .call(yAxis);
+
 	};
 	
 	return me;
 }());
 
 $(document).on('opened', '#nciDetails', function () {
-	NCI.nciHistogram.show();
+	if (NCI.nciActivities.length > 0)
+	    NCI.nciHistogram.show();
 });
 
 $(document).on('open', '#collectorsInfo', function () {
