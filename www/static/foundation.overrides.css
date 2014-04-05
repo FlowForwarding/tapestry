@@ -121,6 +121,10 @@
 }
 
 
+#nciHistogram text{
+	font: 12px sans-serif;
+}
+
 #nciHistogram div {
   font: 10px sans-serif;
   background-color: steelblue;

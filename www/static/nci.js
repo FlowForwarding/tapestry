@@ -222,6 +222,10 @@ NCI.nciHistogram = (function(){
 		    .append('g')
 		    .attr('transform', 'translate(' + margin.left + ', ' + margin.top + ')');
 
+		var showDetails = function(d){
+			alert(d.details);
+		};
+
 		svg.selectAll('g')
 		    .data(activities)
 		    .enter().append('rect')
@@ -230,6 +234,16 @@ NCI.nciHistogram = (function(){
 		    .attr('y', function(d) { return  y(d.size)})
 		    .attr('width', function(d) { return  x(d.endpoints)})
 		    .attr('height', 18)
+			.on("click", showDetails);
+		
+		svg.selectAll('g')
+		    .data(activities)
+			.enter().append('text')
+			.attr('x', function(d) { return  5 + width - margin.left - margin.right - x(d.endpoints) })
+			.attr('y', function(d) { return  y(d.size) + 14})
+		    .attr('fill', '#fff')
+			.on("click", showDetails)
+			.text(function(d) { return d.name; });	
 
 		svg.append('g')
 		    .attr('class', 'x axis')
@@ -237,9 +251,9 @@ NCI.nciHistogram = (function(){
 		    .call(xAxis);
 
 		svg.append('g')
-		  .attr('class', 'y axis')
-		  .attr('transform', 'translate(' + (width - margin.right - margin.left) + ')')
-		  .call(yAxis);
+		    .attr('class', 'y axis')
+		    .attr('transform', 'translate(' + (width - margin.right - margin.left) + ')')
+		    .call(yAxis);
 
 	};
 	
