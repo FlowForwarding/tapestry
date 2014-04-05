@@ -216,16 +216,16 @@ NCI.nciHistogram = (function(){
 		    .tickPadding(8);
 
 		var svg = chart.append('svg')
-		    .attr('class', 'chart')
+		  //  .attr('class', 'chart')
 		    .attr('width', width)
 		    .attr('height', height)
 		    .append('g')
 		    .attr('transform', 'translate(' + margin.left + ', ' + margin.top + ')');
 
-		svg.selectAll('#nciHistogramss')
+		svg.selectAll('g')
 		    .data(activities)
 		    .enter().append('rect')
-		    .attr('class', 'bar')
+		   // .attr('class', 'bar')
 		    .attr('x', function(d) { return  width - margin.left - margin.right - x(d.endpoints) })
 		    .attr('y', function(d) { return  y(d.size)})
 		    .attr('width', function(d) { return  x(d.endpoints)})
@@ -245,6 +245,77 @@ NCI.nciHistogram = (function(){
 	
 	return me;
 }());
+
+NCI.socialGraph = (function(){
+	var me = $('#socialGraph');
+	
+	var chart = d3.select("#socialGraph"),
+	    width = 400,
+	    height = 300,
+		margin = {top: 10, right: 10, bottom: 10, left:10};
+	
+	var edges = [
+	    {target1: 0, value1: 1, target2: 10, value2: 4},
+	    {target1: 0, value1: 1, target2: 5, value2: 4},
+	    {target1: 0, value1: 1, target2: 10, value2: 9},
+	    {target1: 5, value1: 4, target2: 8, value2: 9}
+	];
+	
+	var dim = 10;
+     
+	me.show = function(){
+		$("#socialGraph").text('');
+		
+		var x = d3.scale.linear()
+		    .domain([0, d3.max(edges, function(d) { return Math.max(d.target1, d.target2) })])
+		    .range([0, width - margin.left - margin.right]);
+		
+		var y = d3.scale.linear()
+		    .domain([0, d3.max(edges, function(d) { return Math.max(d.value1, d.value2) })])
+			.range([0, height - margin.top - margin.bottom]);	
+
+		var svg = chart.append('svg')
+		    .attr('class', 'chart')
+		    .attr('width', width)
+		    .attr('height', height)
+		    .append('g')
+		    .attr('transform', 'translate(' + margin.left + ', ' + margin.top + ')');
+			
+		svg.selectAll('g')
+		    .data(edges)
+			.enter().append('rect')
+			.attr('x', function(d) { return x(d.target1) - dim/2 })
+			.attr('y', function(d) { return y(d.value1) - dim/2 })
+			.attr('width', function(d) { return  dim })
+			.attr('height', dim);
+		
+		svg.selectAll('g')
+		    .data(edges)
+			.enter().append('rect')
+			.attr('x', function(d) { return x(d.target2) - dim/2 })
+			.attr('y', function(d) { return y(d.value2) - dim/2 })
+			.attr('width', function(d) { return  dim })
+			.attr('height', dim);
+			
+		svg.selectAll('g')
+		    .data(edges)
+			.enter().append('line')
+			.attr("stroke-width", 1)
+			.attr("stroke", "black")
+			.attr("x1", function(d) { return x(d.target1); })
+			.attr("x2", function(d) { return x(d.target2); })
+			.attr("y1", function(d) { return y(d.value1); })
+			.attr("y2", function(d) { return y(d.value2); })
+		
+	};
+   
+	return me;
+}());
+
+
+$(document).on('opened', '#socialPopup', function () {
+	NCI.socialGraph.show();
+});
 
 $(document).on('opened', '#nciDetails', function () {
 	if (NCI.nciActivities.length > 0)
