@@ -125,15 +125,8 @@
 	font: 12px sans-serif;
 }
 
-#nciHistogram div {
-  font: 10px sans-serif;
-  background-color: steelblue;
-  text-align: right;
-  padding: 3px;
-  margin: 2px;
-  color: white;
-  height: 20px;
-  margin-left: auto;
+.collectorsGeneral{
+	font-weight: 500;
 }
 
 .axis path, .axis line {
