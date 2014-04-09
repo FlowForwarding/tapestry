@@ -20,9 +20,9 @@
 
 -module(tap_loom).
 
--include_lib("../lib/loom/deps/ofs_handler/include/ofs_handler.hrl").
--include_lib("../lib/loom/deps/of_protocol/include/of_protocol.hrl").
--include_lib("../lib/loom/deps/of_protocol/include/ofp_v4.hrl").
+-include_lib("../lib/loom/simple_ne/deps/ofs_handler/include/ofs_handler.hrl").
+-include_lib("../lib/loom/simple_ne/deps/of_protocol/include/of_protocol.hrl").
+-include_lib("../lib/loom/simple_ne/deps/of_protocol/include/ofp_v4.hrl").
 
 -compile([export_all]).
 
@@ -31,9 +31,9 @@
 -define(DNS_IP, {10,48,2,5}).
 
 start()->
-    [code:add_pathz(Path) || Path <- filelib:wildcard("./lib/loom/ebin")],
-    [code:add_pathz(Path) || Path <- filelib:wildcard("./lib/loom/deps/*/ebin")],
-    [code:add_pathz(Path) || Path <- filelib:wildcard("./lib/loom/apps/*/ebin")],
+    [code:add_pathz(Path) || Path <- filelib:wildcard("./lib/loom/simple_ne/ebin")],
+    [code:add_pathz(Path) || Path <- filelib:wildcard("./lib/loom/simple_ne/deps/*/ebin")],
+    [code:add_pathz(Path) || Path <- filelib:wildcard("./lib/loom/simple_ne/apps/*/ebin")],
     [code:add_pathz(Path) || Path <- filelib:wildcard("./deps/*/ebin")],
     application:start(mnesia),
     application:start(syntax_tools),
