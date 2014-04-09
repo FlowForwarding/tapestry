@@ -41,7 +41,6 @@ start()->
     ok = application:start(lager),
     lager:set_loglevel(lager_console_backend, error),
     ok = application:start(eenum),
-    ok = application:start(folsom),
     ok = application:start(of_protocol),
     application:start(of_msg_lib),
     application:load(of_driver),
@@ -53,8 +52,6 @@ start()->
     application:set_env(ofs_handler, callback_module, simple_ne_ofsh),
     application:start(ofs_handler),
     application:start(loom),
-    application:load(simple_ne),
-    application:set_env(simple_ne, stats_interval_sec, disable),
     application:start(simple_ne).
     
 
