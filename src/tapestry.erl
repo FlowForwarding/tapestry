@@ -69,7 +69,7 @@ start_grid()->
 packet_in_subscribe()->
     OFSwitchList = simple_ne_logic:switches(),
     lists:foreach(fun(X)->
-			  {OFDPIP, DatapathId, Version, _, _} = X,
+			  {OFDPIP, DatapathId, Version, _} = X,
 			  ofs_handler:subscribe(DatapathId, loom_handler, packet_in)
 		  end, OFSwitchList).
 

@@ -102,7 +102,7 @@ process_ofdps([OFDP|Rest],TargetIP) ->
 	    {dns_ips,IPs} = DNSIps,
 	    OFSwitchList = simple_ne_logic:switches(),
 	    lists:foreach(fun(X)->
-				  {OFDPIP, DatapathId, Version, _, _} = X,
+				  {OFDPIP, DatapathId, Version, _} = X,
 				  case OFDPIP == IPAddr of
 				      true ->
 					  dns_tap([DatapathId],Version,Port1,Port2,IPs);
@@ -128,7 +128,7 @@ process_ofdps([OFDP|Rest]) ->
 	    {dns_ips,IPs} = DNSIps,
 	    OFSwitchList = simple_ne_logic:switches(),
 	    lists:foreach(fun(X)->
-				  {OFDPIP, DatapathId, Version, _, _} = X,
+				  {OFDPIP, DatapathId, Version, _} = X,
 				  case OFDPIP == IPAddr of
 				      true ->
 					  dns_tap([DatapathId],Version,Port1,Port2,IPs);
@@ -142,7 +142,7 @@ process_ofdps([OFDP|Rest]) ->
 bridge(IPAddress,Port1,Port2) ->
     OFSwitchList = simple_ne_logic:switches(),
     lists:foreach(fun(X)->
-			  {OFDPIP, DatapathId, Version, _, _} = X,
+			  {OFDPIP, DatapathId, Version, _} = X,
 			  case OFDPIP == IPAddress of
 			      true ->
 				  ofs_handler:send(DatapathId, forward_mod(Version, Port1, [Port2])),
@@ -154,7 +154,7 @@ bridge(IPAddress,Port1,Port2) ->
 clear_flows(IPAddress) -> 
     OFSwitchList = simple_ne_logic:switches(),
     lists:foreach(fun(X)->
-			  {OFDPIP, DatapathId, Version, _, _} = X,
+			  {OFDPIP, DatapathId, Version, _} = X,
 			  case OFDPIP == IPAddress of
 			      true ->
 				  ofs_handler:send(DatapathId, remove_all_flows_mod(Version));
