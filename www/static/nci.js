@@ -231,12 +231,16 @@ NCI.nciHistogram = (function(){
 		    .data(activities)
 		    .enter().append('rect')
 		   // .attr('class', 'bar')
-		    .attr('x', function(d) { return   x(d.endpoints) })
+		    .attr('x', function(d) { return   0 })
 		    .attr('y', function(d) { return  y(d.size) - barHeight}) //- selfwidth
-		    .attr('width', function(d) {  
-				return width - margin.left - margin.right -x(d.endpoints)})
+		    .attr('width', function(d) { return 0})
 		    .attr('height', barHeight)
 			.on("click", showDetails);
+			
+		  svg.selectAll('rect').data(activities).transition()
+		      .duration(1000)
+		      .attr("width", function(d) { return width - margin.left - margin.right -x(d.endpoints)})
+			  .attr('x', function(d) { return   x(d.endpoints) });
 		
 		svg.selectAll('g')
 		    .data(activities)
