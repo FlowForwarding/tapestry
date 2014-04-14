@@ -20,9 +20,9 @@
 
 -module(tap_loom).
 
--include_lib("../lib/loom/deps/ofs_handler/include/ofs_handler.hrl").
--include_lib("../lib/loom/deps/of_protocol/include/of_protocol.hrl").
--include_lib("../lib/loom/deps/of_protocol/include/ofp_v4.hrl").
+-include_lib("../lib/loom/simple_ne/deps/ofs_handler/include/ofs_handler.hrl").
+-include_lib("../lib/loom/simple_ne/deps/of_protocol/include/of_protocol.hrl").
+-include_lib("../lib/loom/simple_ne/deps/of_protocol/include/ofp_v4.hrl").
 
 -compile([export_all]).
 
@@ -31,9 +31,9 @@
 -define(DNS_IP, {10,48,2,5}).
 
 start()->
-    [code:add_pathz(Path) || Path <- filelib:wildcard("./lib/loom/ebin")],
-    [code:add_pathz(Path) || Path <- filelib:wildcard("./lib/loom/deps/*/ebin")],
-    [code:add_pathz(Path) || Path <- filelib:wildcard("./lib/loom/apps/*/ebin")],
+    [code:add_pathz(Path) || Path <- filelib:wildcard("./lib/loom/simple_ne/ebin")],
+    [code:add_pathz(Path) || Path <- filelib:wildcard("./lib/loom/simple_ne/deps/*/ebin")],
+    [code:add_pathz(Path) || Path <- filelib:wildcard("./lib/loom/simple_ne/apps/*/ebin")],
     [code:add_pathz(Path) || Path <- filelib:wildcard("./deps/*/ebin")],
     application:start(mnesia),
     application:start(syntax_tools),
@@ -41,7 +41,6 @@ start()->
     ok = application:start(lager),
     lager:set_loglevel(lager_console_backend, error),
     ok = application:start(eenum),
-    ok = application:start(folsom),
     ok = application:start(of_protocol),
     application:start(of_msg_lib),
     application:load(of_driver),
@@ -53,8 +52,6 @@ start()->
     application:set_env(ofs_handler, callback_module, simple_ne_ofsh),
     application:start(ofs_handler),
     application:start(loom),
-    application:load(simple_ne),
-    application:set_env(simple_ne, stats_interval_sec, disable),
     application:start(simple_ne).
     
 
@@ -105,7 +102,7 @@ process_ofdps([OFDP|Rest],TargetIP) ->
 	    {dns_ips,IPs} = DNSIps,
 	    OFSwitchList = simple_ne_logic:switches(),
 	    lists:foreach(fun(X)->
-				  {OFDPIP, DatapathId, Version, _, _} = X,
+				  {OFDPIP, DatapathId, Version, _} = X,
 				  case OFDPIP == IPAddr of
 				      true ->
 					  dns_tap([DatapathId],Version,Port1,Port2,IPs);
@@ -131,7 +128,7 @@ process_ofdps([OFDP|Rest]) ->
 	    {dns_ips,IPs} = DNSIps,
 	    OFSwitchList = simple_ne_logic:switches(),
 	    lists:foreach(fun(X)->
-				  {OFDPIP, DatapathId, Version, _, _} = X,
+				  {OFDPIP, DatapathId, Version, _} = X,
 				  case OFDPIP == IPAddr of
 				      true ->
 					  dns_tap([DatapathId],Version,Port1,Port2,IPs);
@@ -145,7 +142,7 @@ process_ofdps([OFDP|Rest]) ->
 bridge(IPAddress,Port1,Port2) ->
     OFSwitchList = simple_ne_logic:switches(),
     lists:foreach(fun(X)->
-			  {OFDPIP, DatapathId, Version, _, _} = X,
+			  {OFDPIP, DatapathId, Version, _} = X,
 			  case OFDPIP == IPAddress of
 			      true ->
 				  ofs_handler:send(DatapathId, forward_mod(Version, Port1, [Port2])),
@@ -157,7 +154,7 @@ bridge(IPAddress,Port1,Port2) ->
 clear_flows(IPAddress) -> 
     OFSwitchList = simple_ne_logic:switches(),
     lists:foreach(fun(X)->
-			  {OFDPIP, DatapathId, Version, _, _} = X,
+			  {OFDPIP, DatapathId, Version, _} = X,
 			  case OFDPIP == IPAddress of
 			      true ->
 				  ofs_handler:send(DatapathId, remove_all_flows_mod(Version));

@@ -3,9 +3,9 @@
 
 -compile(export_all).
 
--include_lib("../lib/loom/deps/ofs_handler/include/ofs_handler.hrl").
--include_lib("../lib/loom/deps/of_protocol/include/of_protocol.hrl").
--include_lib("../lib/loom/deps/of_protocol/include/ofp_v4.hrl").
+-include_lib("../lib/loom/simple_ne/deps/ofs_handler/include/ofs_handler.hrl").
+-include_lib("../lib/loom/simple_ne/deps/of_protocol/include/of_protocol.hrl").
+-include_lib("../lib/loom/simple_ne/deps/of_protocol/include/ofp_v4.hrl").
 -include_lib("../deps/pkt/include/pkt.hrl").
 
 
@@ -57,13 +57,13 @@ dns_reply(Data)->
 				whereis(tap_aggr) ! {dns_reply,SendValue}
 				%[ Pid ! {dns_reply,SendValue} || Pid <- Pids ]
 			end;
-		    _ -> lager:info("No match dropped: ~p~n",[Result])
+		    _ -> lager:debug("No match dropped: ~p~n",[Result])
 		end;
-	    _ -> lager:info("No match dropped: ~p~n",[Packet])
+	    _ -> lager:debug("No match dropped: ~p~n",[Packet])
 	end
     catch
 	Error ->
-	    lager:info("Decapsulation Error:~p Data: ~p~n",[Error,Data])
+	    lager:debug("Decapsulation Error:~p Data: ~p~n",[Error,Data])
     end.
 
 

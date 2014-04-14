@@ -40,9 +40,9 @@ start(Type)->
 start_loom()->
     error_logger:info_msg("Starting tapestry. Loom Mode. View $TAPESTRY_HOME/log/console.log for operational messages.~n"),
     [code:add_pathz(Path) || Path <- filelib:wildcard("./deps/*/ebin")],
-    [code:add_pathz(Path) || Path <- filelib:wildcard("./lib/loom/ebin")],
-    [code:add_pathz(Path) || Path <- filelib:wildcard("./lib/loom/deps/*/ebin")],
-    [code:add_pathz(Path) || Path <- filelib:wildcard("./lib/loom/apps/*/ebin")],
+    [code:add_pathz(Path) || Path <- filelib:wildcard("./lib/loom/simple_ne/ebin")],
+    [code:add_pathz(Path) || Path <- filelib:wildcard("./lib/loom/simple_ne/deps/*/ebin")],
+    [code:add_pathz(Path) || Path <- filelib:wildcard("./lib/loom/simple_ne/apps/*/ebin")],
     tap_loom:start(),
 %    loom_app:start(),
 %    loom_sup:launch_controller(dns_tap,6634),
@@ -54,9 +54,9 @@ start_loom()->
 start_grid()->
     {ftpd,Port} = tap_config:get([ports,ftpd]),
     error_logger:info_msg("Starting tapestry.~n Grid Mode. Listening via FTP on port ~p.~n View $TAPESTRY_HOME/log/console.log for operational messages.~n",[Port]),
-    [code:add_pathz(Path) || Path <- filelib:wildcard("./lib/loom/ebin")],
-    [code:add_pathz(Path) || Path <- filelib:wildcard("./lib/loom/deps/*/ebin")],
-    [code:add_pathz(Path) || Path <- filelib:wildcard("./lib/loom/apps/*/ebin")],
+    [code:add_pathz(Path) || Path <- filelib:wildcard("./lib/simple_ne/loom/ebin")],
+    [code:add_pathz(Path) || Path <- filelib:wildcard("./lib/simple_ne/loom/deps/*/ebin")],
+    [code:add_pathz(Path) || Path <- filelib:wildcard("./lib/simple_ne/loom/apps/*/ebin")],
     [code:add_pathz(Path) || Path <- filelib:wildcard("./lib/bifrost/ebin")],
     [code:add_pathz(Path) || Path <- filelib:wildcard("./lib/bifrost/deps/*/ebin")],
     tap_yaws:start(),
@@ -69,7 +69,7 @@ start_grid()->
 packet_in_subscribe()->
     OFSwitchList = simple_ne_logic:switches(),
     lists:foreach(fun(X)->
-			  {OFDPIP, DatapathId, Version, _, _} = X,
+			  {OFDPIP, DatapathId, Version, _} = X,
 			  ofs_handler:subscribe(DatapathId, loom_handler, packet_in)
 		  end, OFSwitchList).
 
