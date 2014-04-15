@@ -231,12 +231,16 @@ NCI.nciHistogram = (function(){
 		    .data(activities)
 		    .enter().append('rect')
 		   // .attr('class', 'bar')
-		    .attr('x', function(d) { return   x(d.endpoints) })
+		    .attr('x', function(d) { return   0 })
 		    .attr('y', function(d) { return  y(d.size) - barHeight}) //- selfwidth
-		    .attr('width', function(d) {  
-				return width - margin.left - margin.right -x(d.endpoints)})
+		    .attr('width', function(d) { return 0})
 		    .attr('height', barHeight)
 			.on("click", showDetails);
+			
+		  svg.selectAll('rect').data(activities).transition()
+		      .duration(1000)
+		      .attr("width", function(d) { return width - margin.left - margin.right -x(d.endpoints)})
+			  .attr('x', function(d) { return   x(d.endpoints) });
 		
 		svg.selectAll('g')
 		    .data(activities)
@@ -281,7 +285,14 @@ NCI.socialGraph = (function(){
 	    {target1: 5, value1: 4, target2: 8, value2: 9}
 	];
 	
-	var dim = 10;
+	for (var i=0; i< 15; i++){
+		edges.push({target1: Math.floor((Math.random()*20)+1), 
+			value1: Math.floor((Math.random()*20)+1), 
+			target2: Math.floor((Math.random()*20)+1), 
+			value2: Math.floor((Math.random()*20)+1)});	
+	};
+	
+	var dim = 8;
      
 	me.show = function(){
 		$("#socialGraph").text('');
@@ -300,7 +311,7 @@ NCI.socialGraph = (function(){
 		    .attr('height', height)
 		    .append('g')
 		    .attr('transform', 'translate(' + margin.left + ', ' + margin.top + ')');
-			
+		
 		svg.selectAll('g')
 		    .data(edges)
 			.enter().append('rect')
@@ -309,23 +320,33 @@ NCI.socialGraph = (function(){
 			.attr('width', function(d) { return  dim })
 			.attr('height', dim);
 		
+        svg.selectAll('rect').data(edges).transition()
+   		    .duration(1000)
+   		    .attr("x", function(d) { return x(d.target2) - dim/2 })
+   		    .attr("y", function(d) { return y(d.value2) - dim/2 });	
+			
 		svg.selectAll('g')
 		    .data(edges)
 			.enter().append('rect')
-			.attr('x', function(d) { return x(d.target2) - dim/2 })
-			.attr('y', function(d) { return y(d.value2) - dim/2 })
+			.attr('x', function(d) { return x(d.target1) - dim/2 })
+			.attr('y', function(d) { return y(d.value1) - dim/2 })
 			.attr('width', function(d) { return  dim })
-			.attr('height', dim);
-			
+			.attr('height', dim);			
+  			
 		svg.selectAll('g')
 		    .data(edges)
 			.enter().append('line')
 			.attr("stroke-width", 1)
 			.attr("stroke", "black")
 			.attr("x1", function(d) { return x(d.target1); })
-			.attr("x2", function(d) { return x(d.target2); })
+			.attr("x2", function(d) { return x(d.target1); })
 			.attr("y1", function(d) { return y(d.value1); })
-			.attr("y2", function(d) { return y(d.value2); })
+			.attr("y2", function(d) { return y(d.value1); });
+			
+  		 svg.selectAll('line').data(edges).transition()
+		 .duration(1000)
+		 .attr("x2", function(d) { return x(d.target2); })
+		 .attr("y2", function(d) { return y(d.value2); });
 		
 	};
    
