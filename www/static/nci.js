@@ -278,19 +278,11 @@ NCI.socialGraph = (function(){
     height = 300,
     margin = {top: 10, right: 10, bottom: 10, left:10};
 	
-    var interactions = [["10.2.52.255","10.9.11.252"],
-                        ["10.5.8.216","10.1.1.58"],
-                        ["10.8.14.14","10.5.1.89"],
-                        ["10.10.59.73","10.7.66.101"],
-                        ["10.2.14.156","10.4.95.149"],
-                        ["10.5.1.89","10.5.1.89"],
-                        ["10.5.97.73","10.9.11.252"],
-                        ["10.7.21.125","10.10.70.236"],
-                        ["10.1.26.197","10.9.11.252"],
-                        ["10.10.4.134","10.7.66.101"],
-                        ["10.8.64.93","10.10.70.236"]];
-    
-    
+	var communities;
+	$.getJSON( "static/interactions.json", function( data ) {
+		communities = data.Communities;
+	});
+	
 	var labelType, useGradients, nativeTextSupport, animate;
 	var ua = navigator.userAgent,
     iStuff = ua.match(/iPhone/i) || ua.match(/iPad/i),
@@ -307,49 +299,59 @@ NCI.socialGraph = (function(){
 	me.show = function(){
 		$("#socialGraph").text('');
 		var json = [];
-		var community1Data =
-		$.each(interactions, function(index, interacton){
-			json.push(
-                      {
-                          "adjacencies": [
-                                          {
-                                              "nodeTo": interacton[1],
-                                              "nodeFrom": interacton[0]
-                                          }
-                                          ],
-                          "data": { "$color": "#557EAA"},
-                          "id": interacton[0]
-                      },
-                      {
-                          "data": { "$color": "#557EAA"},
-                          "id": interacton[1]
-                      }
-                      );
+	
+        var colors = ["#557EAA", "#91C82F", " #E52B50", "#FDEE00", "#ED872D", "#8B0000", "#FF8C00", "#B0E0E6", "#00CED1", "#9400D3"];	
+		$.each(communities, function(index, community){
+			var interactions = community.Interactions;
+			$.each(interactions, function(index, interacton){
+				json.push({
+					     "adjacencies": [{
+					         "nodeTo": interacton[1],
+					         "nodeFrom": interacton[0]
+					     }],
+						 "data": { "$color": "#00"},
+						 "id": interacton[0]
+				});	
+				$.each(communities, function(index, community){
+					var communityData = { "$color": colors[index]};
+				$.each(community.Endpoints, function(index, endpoint){
+					json.push({
+						"data": communityData,
+						"id": endpoint
+					});
+				});
+				});
+			
+				
+			});
 		});
-		
-		
+			
         // init ForceDirected
         var fd = new $jit.ForceDirected({
             //id of the visualization container
-	    injectInto: 'socialGraph',
-	    Navigation: {
-        enable: true,
-        panning: 'avoid nodes',
-        zooming: 10 //zoom speed. higher is more sensible
-	    },
-	    Node: {
-        overridable: true
-	    },
-	    Edge: {
-        overridable: true,
-        color: 'black',
-        lineWidth: 0.4
-	    },
+			injectInto: 'socialGraph',
+	        Navigation: {
+             enable: true,
+             panning: 'avoid nodes',
+             zooming: 10 //zoom speed. higher is more sensible
+	        },
+	        Node: {
+               overridable: true
+	        },
+	        Label: {  
+	            type: labelType, //Native or HTML  
+	            size: 10,  
+	            style: 'bold'  
+	        }, 
+	        Edge: {
+                overridable: true,
+                color: 'black',
+                lineWidth: 0.4
+	        },
             //Native canvas text styling
-	    Label: {
-        type: labelType, //Native or HTML
-        size: 10,
-        style: 'bold'
+	        Label: {
+               type: labelType, //Native or HTML
+               size: 0
 	    },
             //Add Tips
 	    Tips: {
