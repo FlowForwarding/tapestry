@@ -237,7 +237,7 @@ NCI.nciHistogram = (function(){
 		    .attr('height', barHeight)
 			.on("click", showDetails);
 			
-		  svg.selectAll('rect').data(activities).transition()
+		svg.selectAll('rect').data(activities).transition()
 		      .duration(1000)
 		      .attr("width", function(d) { return width - margin.left - margin.right -x(d.endpoints)})
 			  .attr('x', function(d) { return   x(d.endpoints) });
@@ -272,11 +272,6 @@ NCI.nciHistogram = (function(){
 
 NCI.socialGraph = (function(){
 	var me = $('#socialGraph');
-	
-	var chart = d3.select("#socialGraph"),
-    width = 400,
-    height = 300,
-    margin = {top: 10, right: 10, bottom: 10, left:10};
 	
 	var communities;
 	$.getJSON( "static/interactions.json", function( data ) {
@@ -414,8 +409,109 @@ NCI.socialGraph = (function(){
 	return me;
 }());
 
+
+NCI.socialGraph2 = (function(){
+	var me = $('#socialGraph2');
+	
+	var communities;
+	$.getJSON( "static/interactions.json", function( data ) {
+		communities = data.Communities;
+	});
+	
+	me.show = function(){
+		me.text("");
+		
+		var	graph = {
+			"nodes":[],
+			"links": []};
+			
+			
+			var nodeIndex = function(ip){
+				var val = 0;
+				$.each(graph.nodes, function(index, node){
+					if (node.name == ip)
+					   val = index;
+				});
+				return val;
+			};	
+		
+		$.each(communities, function(index, community){
+		    $.each(community.Endpoints, function(index2, endpoint){
+			    graph.nodes.push({
+				    "name": endpoint,
+				    "group": index
+			    });
+		    });
+		});
+		
+		$.each(communities, function(index, community){
+			var interactions = community.Interactions;
+			$.each(interactions, function(index2, interacton){
+				
+				graph.links.push({
+					"source": nodeIndex(interacton[1]),
+					"target": nodeIndex(interacton[0]),
+					"value":1});					
+			});
+		});
+		
+	
+		var color = d3.scale.category20();
+
+		var force = d3.layout.force()
+		    .charge(-120)
+		    .linkDistance(30)
+		    .size([ me.width(), 400]);
+
+		var svg = d3.select('#socialGraph2').append("svg")
+		    .attr("width", me.width())
+		    .attr("height", 400);
+
+		  force
+		      .nodes(graph.nodes)
+		      .links(graph.links)
+		      .start();
+
+		  var link = svg.selectAll(".link")
+		      .data(graph.links)
+		    .enter().append("line")
+		      .attr("class", "link")
+		      .style("stroke-width", function(d) { return Math.sqrt(d.value); });
+
+		  var node = svg.selectAll(".node")
+		      .data(graph.nodes)
+		    .enter().append("circle")
+		      .attr("class", "node")
+		      .attr("r", 5)
+		      .style("fill", function(d) { return color(d.group); })
+		      .call(force.drag);
+
+		  node.append("title")
+		      .text(function(d) { return d.name; });
+
+		  force.on("tick", function() {
+		    link.attr("x1", function(d) { return d.source.x; })
+		        .attr("y1", function(d) { return d.source.y; })
+		        .attr("x2", function(d) { return d.target.x; })
+		        .attr("y2", function(d) { return d.target.y; });
+
+		    node.attr("cx", function(d) { return d.x; })
+		        .attr("cy", function(d) { return d.y; });
+		  });
+	
+		
+	};
+	
+	return me;
+}());
+
 $(document).on('opened', '#socialPopup', function () {
 	NCI.socialGraph.show();
+});
+
+
+$(document).on('opened', '#socialPopup2', function () {
+	NCI.socialGraph2.show();
 });
 
 $(document).on('opened', '#nciDetails', function () {

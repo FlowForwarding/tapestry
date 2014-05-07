@@ -10,6 +10,20 @@
 	
 	    <script src='bower_components/modernizr/modernizr.js'></script> 
 		
+		<style>
+
+		.node {
+		  stroke: #fff;
+		  stroke-width: 1.5px;
+		}
+
+		.link {
+		  stroke: #999;
+		  stroke-opacity: .6;
+		}
+
+		</style>
+		
 	</head>
 	<body>
         <!-- <dl id="copyright">
@@ -57,7 +71,11 @@
 			</div>	
 			<div class="large-4 small-2 columns">
 				<a class='button' data-reveal-id="socialPopup" class="reveal-modal">Interactions</a>
-			</div>	  
+			</div>	 
+			
+			<div class="large-4 small-2 columns">
+				<a class='button' data-reveal-id="socialPopup2" class="reveal-modal">Interactions d3</a>
+			</div> 
 		</div>  
 		<br><br>
 		<div class="row zoom-panel"> <span class="radius secondary label">Zoom: </span>
@@ -121,6 +139,13 @@
 		
 		<div id="socialPopup" class="reveal-modal" data-reveal>
 	        <div id="socialGraph" style="width:800px;height:400px;">
+	        </div>
+			
+			<a class="close-reveal-modal">&#215;</a>
+		</div>
+		
+		<div id="socialPopup2" class="reveal-modal" data-reveal>
+	        <div id="socialGraph2" style="width:800px;height:400px;">
 	        </div>
 			
 			<a class="close-reveal-modal">&#215;</a>
