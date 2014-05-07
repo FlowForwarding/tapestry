@@ -274,85 +274,143 @@ NCI.socialGraph = (function(){
 	var me = $('#socialGraph');
 	
 	var chart = d3.select("#socialGraph"),
-	    width = 400,
-	    height = 300,
-		margin = {top: 10, right: 10, bottom: 10, left:10};
+    width = 400,
+    height = 300,
+    margin = {top: 10, right: 10, bottom: 10, left:10};
 	
-	var edges = [
-	    {target1: 0, value1: 1, target2: 10, value2: 4},
-	    {target1: 0, value1: 1, target2: 5, value2: 4},
-	    {target1: 0, value1: 1, target2: 10, value2: 9},
-	    {target1: 5, value1: 4, target2: 8, value2: 9}
-	];
-	
-	for (var i=0; i< 15; i++){
-		edges.push({target1: Math.floor((Math.random()*20)+1), 
-			value1: Math.floor((Math.random()*20)+1), 
-			target2: Math.floor((Math.random()*20)+1), 
-			value2: Math.floor((Math.random()*20)+1)});	
-	};
-	
-	var dim = 8;
-     
+    var interactions = [["10.2.52.255","10.9.11.252"],
+                        ["10.5.8.216","10.1.1.58"],
+                        ["10.8.14.14","10.5.1.89"],
+                        ["10.10.59.73","10.7.66.101"],
+                        ["10.2.14.156","10.4.95.149"],
+                        ["10.5.1.89","10.5.1.89"],
+                        ["10.5.97.73","10.9.11.252"],
+                        ["10.7.21.125","10.10.70.236"],
+                        ["10.1.26.197","10.9.11.252"],
+                        ["10.10.4.134","10.7.66.101"],
+                        ["10.8.64.93","10.10.70.236"]];
+    
+    
+	var labelType, useGradients, nativeTextSupport, animate;
+	var ua = navigator.userAgent,
+    iStuff = ua.match(/iPhone/i) || ua.match(/iPad/i),
+    typeOfCanvas = typeof HTMLCanvasElement,
+    nativeCanvasSupport = (typeOfCanvas == 'object' || typeOfCanvas == 'function'),
+    textSupport = nativeCanvasSupport && (typeof document.createElement('canvas').getContext('2d').fillText == 'function');
+    //ExCanvas provides text support for IE
+    //and that as of today iPhone/iPad current text support is lame
+    labelType = (!nativeCanvasSupport || (textSupport && !iStuff))? 'Native' : 'HTML';
+    nativeTextSupport = labelType == 'Native';
+    useGradients = nativeCanvasSupport;
+    animate = !(iStuff || !nativeCanvasSupport);
+    
 	me.show = function(){
 		$("#socialGraph").text('');
+		var json = [];
+		var community1Data =
+		$.each(interactions, function(index, interacton){
+			json.push(
+                      {
+                          "adjacencies": [
+                                          {
+                                              "nodeTo": interacton[1],
+                                              "nodeFrom": interacton[0]
+                                          }
+                                          ],
+                          "data": { "$color": "#557EAA"},
+                          "id": interacton[0]
+                      },
+                      {
+                          "data": { "$color": "#557EAA"},
+                          "id": interacton[1]
+                      }
+                      );
+		});
 		
-		var x = d3.scale.linear()
-		    .domain([0, d3.max(edges, function(d) { return Math.max(d.target1, d.target2) })])
-		    .range([0, width - margin.left - margin.right]);
 		
-		var y = d3.scale.linear()
-		    .domain([0, d3.max(edges, function(d) { return Math.max(d.value1, d.value2) })])
-			.range([0, height - margin.top - margin.bottom]);	
-
-		var svg = chart.append('svg')
-		    .attr('class', 'chart')
-		    .attr('width', width)
-		    .attr('height', height)
-		    .append('g')
-		    .attr('transform', 'translate(' + margin.left + ', ' + margin.top + ')');
-		
-		svg.selectAll('g')
-		    .data(edges)
-			.enter().append('rect')
-			.attr('x', function(d) { return x(d.target1) - dim/2 })
-			.attr('y', function(d) { return y(d.value1) - dim/2 })
-			.attr('width', function(d) { return  dim })
-			.attr('height', dim);
-		
-        svg.selectAll('rect').data(edges).transition()
-   		    .duration(1000)
-   		    .attr("x", function(d) { return x(d.target2) - dim/2 })
-   		    .attr("y", function(d) { return y(d.value2) - dim/2 });	
-			
-		svg.selectAll('g')
-		    .data(edges)
-			.enter().append('rect')
-			.attr('x', function(d) { return x(d.target1) - dim/2 })
-			.attr('y', function(d) { return y(d.value1) - dim/2 })
-			.attr('width', function(d) { return  dim })
-			.attr('height', dim);			
-  			
-		svg.selectAll('g')
-		    .data(edges)
-			.enter().append('line')
-			.attr("stroke-width", 1)
-			.attr("stroke", "black")
-			.attr("x1", function(d) { return x(d.target1); })
-			.attr("x2", function(d) { return x(d.target1); })
-			.attr("y1", function(d) { return y(d.value1); })
-			.attr("y2", function(d) { return y(d.value1); });
-			
-  		 svg.selectAll('line').data(edges).transition()
-		 .duration(1000)
-		 .attr("x2", function(d) { return x(d.target2); })
-		 .attr("y2", function(d) { return y(d.value2); });
-		
+        // init ForceDirected
+        var fd = new $jit.ForceDirected({
+            //id of the visualization container
+	    injectInto: 'socialGraph',
+	    Navigation: {
+        enable: true,
+        panning: 'avoid nodes',
+        zooming: 10 //zoom speed. higher is more sensible
+	    },
+	    Node: {
+        overridable: true
+	    },
+	    Edge: {
+        overridable: true,
+        color: 'black',
+        lineWidth: 0.4
+	    },
+            //Native canvas text styling
+	    Label: {
+        type: labelType, //Native or HTML
+        size: 10,
+        style: 'bold'
+	    },
+            //Add Tips
+	    Tips: {
+        enable: true,
+        onShow: function(tip, node) {
+	        var count = 0;
+	        node.eachAdjacency(function() { count++; });
+	        tip.innerHTML = "<div class=\"tip-title\">" + node.id + "</div>"
+            + "<div class=\"tip-text\"><b>connections:</b> " + count + "</div>";
+        }
+	    },
+            // Add node events
+	    Events: {
+        enable: true,
+        type: 'Native',
+        onMouseEnter: function() {
+	        fd.canvas.getElement().style.cursor = 'move';
+        },
+        onMouseLeave: function() {
+	        fd.canvas.getElement().style.cursor = '';
+        },
+        onDragMove: function(node, eventInfo, e) {
+            var pos = eventInfo.getPos();
+            node.pos.setc(pos.x, pos.y);
+            fd.plot();
+        },
+        onTouchMove: function(node, eventInfo, e) {
+	        $jit.util.event.stop(e); //stop default touchmove event
+	        this.onDragMove(node, eventInfo, e);
+        },
+        onClick: function(node) {
+	        if(!node) return;
+	        var html = "<h4>" + node.name + "</h4> connections: d",
+            list = [];
+	        node.eachAdjacency(function(adj){
+                list.push(adj.nodeTo.name);
+	        });
+        }
+	    },
+	    levelDistance: 130,
+	    onCreateLabel: function(domElement, node){
+            domElement.innerHTML = node.name;
+            var style = domElement.style;
+            style.fontSize = "0.8em";
+            style.color = "#ddd";
+	    }
+        });
+        
+        fd.loadJSON(json);	  
+        fd.computeIncremental({
+	    onComplete: function(){
+            fd.animate({
+	        modes: ['linear'],
+	        duration: 500
+            });
+	    }
+        });
 	};
-   
+    
 	return me;
 }());
-
 
 $(document).on('opened', '#socialPopup', function () {
 	NCI.socialGraph.show();
