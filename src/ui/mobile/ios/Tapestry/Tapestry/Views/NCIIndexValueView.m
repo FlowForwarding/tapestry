@@ -91,6 +91,7 @@
 }
 
 - (void)setIndValue:(NSString *)value withDate:(NSString *)date{
+    self.dateServerString = date;
     indValue.text = [self processIndexValue: value];
     updateLabel.text = [NSString stringWithFormat:NSLocalizedString(@"updated %@", nil), [self processTime:date]];
 }

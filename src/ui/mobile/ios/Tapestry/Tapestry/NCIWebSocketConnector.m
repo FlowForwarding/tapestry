@@ -28,6 +28,8 @@ static NSString* defaultWebsocketUrl = @"epamove.herokuapp.com";
 static NSString* websocketStartRequest = @"START_DATA";
 static NSString* websocketMoreDataRequest =
 @"{\"request\":\"more_data\",\"start\": \"%@Z\",\"end\": \"%@Z\",\"max_items\": \"800\"}";
+static NSString* websocketCollectorsDetailsRequest =
+@"{\"action\":\"collectors\",\"Time\": \"%@Z\"}";
 
 @implementation NCIWebSocketConnector
 
@@ -94,6 +96,10 @@ static NSString* websocketMoreDataRequest =
     NSString *endDateString = [self formatDataForServer: endDate];
     NSString *startDateString = [self formatDataForServer:startDate];
     [socket send: [NSString stringWithFormat: websocketMoreDataRequest, startDateString, endDateString]];
+}
+
+- (void)requestCollecotrsDetails:(NSString *) date{
+    [socket send: [NSString stringWithFormat: websocketCollectorsDetailsRequest, date]];
 }
 
 - (void)resetData{
@@ -247,6 +253,8 @@ static NSString* websocketMoreDataRequest =
         [self.qpsValue setIndValue:dataPoint[@"QPS"] withDate:dataPoint[@"Time"]];
     } else if([dataPoint[@"action"] isEqualToString:@"Collectors"]){
         [self.collectorsValue setIndValue:dataPoint[@"COLLECTORS"] withDate:dataPoint[@"Time"]];
+    } else if([dataPoint[@"action"] isEqualToString:@"collectors"]){
+        self.collectorsDetailsView.collectors = dataPoint[@"Collectors"];
     } else if (dataPoint[@"start_time"]){
          NSString *start_time = dataPoint[@"start_time"];
         self.startDate = [self dateFromServerString:start_time];

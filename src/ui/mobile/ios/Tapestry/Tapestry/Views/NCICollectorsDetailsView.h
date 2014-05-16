@@ -1,5 +1,5 @@
 //
-//  NCIDetailsView.h
+//  NCICollectorsDetailsView.h
 //  Tapestry
 //
 //  Created by Ira on 5/16/14.
@@ -8,6 +8,8 @@
 
 #import "NCIDetails.h"
 
-@interface NCIDetailsView : NCIDetails
+@interface NCICollectorsDetailsView : NCIDetails
+
+@property(nonatomic, strong) NSArray *collectors;
 
 @end

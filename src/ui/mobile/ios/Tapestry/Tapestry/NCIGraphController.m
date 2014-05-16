@@ -15,6 +15,7 @@
 #import "NCIPeriodSwitcherPanel.h"
 #import "NCIWebSocketConnector.h"
 #import "NCIDetailsView.h"
+#import "NCICollectorsDetailsView.h"
 
 @interface NCIGraphController() <UIGestureRecognizerDelegate>{
     NCIIndexValueView *nciValue;
@@ -31,6 +32,7 @@
     NCIPeriodSwitcherPanel *switcherPanel;
     UILabel *progressLabel;
     NCIDetailsView *nciDetailsView;
+    NCICollectorsDetailsView *collectorsDetailsView;
     
     bool isShowingLandscapeView;
 }
@@ -85,6 +87,10 @@
     [collectorsValue setTooltipText:NSLocalizedString(@"Number of Collectors", nil)];
     [self.view addSubview:collectorsValue];
     
+    UITapGestureRecognizer *tapCollectors = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showCollectorsDetails)];
+    tapCollectors.numberOfTapsRequired = 1;
+    [collectorsValue addGestureRecognizer:tapCollectors];
+    
     chartView = [[NCIChartView alloc] initWithFrame:
                  CGRectZero andOptions:@{nciTopGraphOptions:@{
                                                  nciUseDateFormatter: @(YES),
@@ -116,6 +122,13 @@
     editServerView = [[NCIEditServerView alloc] initWithFrame:CGRectZero];
     [self.view addSubview:editServerView];
     
+    nciDetailsView = [[NCIDetailsView alloc] initWithFrame:
+                      CGRectMake(0, self.view.bounds.size.width - 60, self.view.bounds.size.height, self.view.bounds.size.width - 60)];
+    [self.view addSubview:nciDetailsView];
+    collectorsDetailsView = [[NCICollectorsDetailsView alloc] initWithFrame:
+                             CGRectMake(0, self.view.bounds.size.width - 60, self.view.bounds.size.height, self.view.bounds.size.width - 60)];
+    [self.view addSubview:collectorsDetailsView];
+    
     helpView = [[NCIHelpView alloc] initIndependantly];
     [self.view addSubview:helpView];
     
@@ -140,6 +153,7 @@
     [NCIWebSocketConnector interlocutor].noConnection =  noConnection;
     [NCIWebSocketConnector interlocutor].periodSwitcherPanel = switcherPanel;
     [NCIWebSocketConnector interlocutor].progressLabel = progressLabel;
+    [NCIWebSocketConnector interlocutor].collectorsDetailsView = collectorsDetailsView;
     [[NCIWebSocketConnector interlocutor] reconnect];
     
     isShowingLandscapeView = NO;
@@ -154,15 +168,18 @@
     freeTap.delegate = self;
     [self.view addGestureRecognizer:freeTap];
     
-    nciDetailsView = [[NCIDetailsView alloc] initWithFrame:
-                      CGRectMake(0, self.view.bounds.size.width - 60, self.view.bounds.size.height, self.view.bounds.size.width - 60)];
-    [self.view addSubview:nciDetailsView];
     
 }
 
 - (void)showNCIDetails{
     nciDetailsView.center = CGPointMake(nciDetailsView.center.x, nciDetailsView.frame.size.height/2);
     [nciDetailsView setContentOffset:CGPointMake(0, nciDetailsView.frame.size.height) animated:YES];
+}
+
+- (void)showCollectorsDetails{
+    [[NCIWebSocketConnector interlocutor] requestCollecotrsDetails:collectorsValue.dateServerString];
+    collectorsDetailsView.center = CGPointMake(collectorsDetailsView.center.x, collectorsDetailsView.frame.size.height/2);
+    [collectorsDetailsView setContentOffset:CGPointMake(0, collectorsDetailsView.frame.size.height) animated:YES];
 }
 
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer{

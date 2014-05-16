@@ -12,6 +12,7 @@
 #import "NCIIndexValueView.h"
 #import "NCIEditServerView.h"
 #import "NCIChartView.h"
+#import "NCICollectorsDetailsView.h"
 #import "NCIPeriodSwitcherPanel.h"
 
 @interface NCIWebSocketConnector : NSObject
@@ -21,10 +22,12 @@
 - (void)reconnect;
 - (void)resetData;
 - (void)requestLastDataForPeiodInSeconds:(float) period;
+- (void)requestCollecotrsDetails:(NSString *) date;
 
 - (void)newTapestryUrl:(NSString *) newUrl;
 - (NSString *)getTapestryUrl;
 - (void)removeURLAtIndex:(long)index;
+
 
 @property(nonatomic, strong) NCIEditServerView *editServerView;
 @property(nonatomic, strong) NCIIndexValueView *nciValue;
@@ -33,6 +36,7 @@
 @property(nonatomic, strong) NCIIndexValueView *collectorsValue;
 @property(nonatomic, strong) NCIChartView *chartView;
 @property(nonatomic, strong) NCIPeriodSwitcherPanel *periodSwitcherPanel;
+@property(nonatomic, strong) NCICollectorsDetailsView *collectorsDetailsView;
 @property(nonatomic, strong) UIButton *noConnection;
 @property(nonatomic, strong) UILabel *progressLabel;
 
