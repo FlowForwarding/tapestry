@@ -14,6 +14,7 @@
 #import "NCIEditServerView.h"
 #import "NCIPeriodSwitcherPanel.h"
 #import "NCIWebSocketConnector.h"
+#import "NCIDetailsView.h"
 
 @interface NCIGraphController() <UIGestureRecognizerDelegate>{
     NCIIndexValueView *nciValue;
@@ -29,6 +30,7 @@
     NCIEditServerView *editServerView;
     NCIPeriodSwitcherPanel *switcherPanel;
     UILabel *progressLabel;
+    NCIDetailsView *nciDetailsView;
     
     bool isShowingLandscapeView;
 }
@@ -37,14 +39,6 @@
 
 @implementation NCIGraphController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
 
 - (void)viewDidLoad
 {
@@ -72,6 +66,9 @@
     
     nciValue = [[NCIIndexValueView alloc] initWithFrame:CGRectZero indName:NSLocalizedString(@"NCI", nil) indSize:22];
     [nciValue setTooltipText: NSLocalizedString(@"Network Complexity Index", nil)];
+    UITapGestureRecognizer *tapNCI = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showNCIDetails)];
+    tapNCI.numberOfTapsRequired = 1;
+    [nciValue addGestureRecognizer:tapNCI];
     
     [self.view addSubview:nciValue];
     qpsValue = [[NCIIndexValueView alloc] initWithFrame:CGRectZero
@@ -157,6 +154,15 @@
     freeTap.delegate = self;
     [self.view addGestureRecognizer:freeTap];
     
+    nciDetailsView = [[NCIDetailsView alloc] initWithFrame:
+                      CGRectMake(0, self.view.bounds.size.width - 60, self.view.bounds.size.height, self.view.bounds.size.width - 60)];
+    [self.view addSubview:nciDetailsView];
+    
+}
+
+- (void)showNCIDetails{
+    nciDetailsView.center = CGPointMake(nciDetailsView.center.x, nciDetailsView.frame.size.height/2);
+    [nciDetailsView setContentOffset:CGPointMake(0, nciDetailsView.frame.size.height) animated:YES];
 }
 
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer{

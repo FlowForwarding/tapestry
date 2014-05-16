@@ -63,8 +63,8 @@
         
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showTooltip)];
         tap.numberOfTapsRequired = 1;
-        indLabel.userInteractionEnabled = YES;
-        [indLabel addGestureRecognizer:tap];
+        helpBtn.userInteractionEnabled = YES;
+        [helpBtn addGestureRecognizer:tap];
 
     }
     return self;
