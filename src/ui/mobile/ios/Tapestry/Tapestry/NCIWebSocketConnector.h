@@ -30,6 +30,7 @@
 @property(nonatomic, strong) NCIIndexValueView *nciValue;
 @property(nonatomic, strong) NCIIndexValueView *nepValue;
 @property(nonatomic, strong) NCIIndexValueView *qpsValue;
+@property(nonatomic, strong) NCIIndexValueView *collectorsValue;
 @property(nonatomic, strong) NCIChartView *chartView;
 @property(nonatomic, strong) NCIPeriodSwitcherPanel *periodSwitcherPanel;
 @property(nonatomic, strong) UIButton *noConnection;

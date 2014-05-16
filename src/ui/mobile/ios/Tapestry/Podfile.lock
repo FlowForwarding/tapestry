@@ -7,7 +7,7 @@ DEPENDENCIES:
   - SocketRocket (~> 0.3.1-beta2)
 
 SPEC CHECKSUMS:
-  NCICharts: 375a02a4d41c9b9ee96378cf623541ddaab8e67c
+  NCICharts: ed563745db39e470ae39814e7109aacfde0a65d0
   SocketRocket: 7ac946bcce46287a791dfff3c1f8daa692821dae
 
-COCOAPODS: 0.29.0
+COCOAPODS: 0.32.1

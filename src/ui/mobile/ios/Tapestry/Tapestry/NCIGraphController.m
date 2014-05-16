@@ -19,6 +19,7 @@
     NCIIndexValueView *nciValue;
     NCIIndexValueView *nepValue;
     NCIIndexValueView *qpsValue;
+    NCIIndexValueView *collectorsValue;
     NCIChartView *chartView;
     UIButton *infoButton;
     NCIHelpView *helpView;
@@ -81,8 +82,11 @@
     
     nepValue = [[NCIIndexValueView alloc] initWithFrame:CGRectZero indName:NSLocalizedString(@"Endpoints", nil) indSize:14];
     [nepValue setTooltipText:NSLocalizedString(@"Number of Connected Network Elements", nil)];
-    
     [self.view addSubview:nepValue];
+    
+    collectorsValue = [[NCIIndexValueView alloc] initWithFrame:CGRectZero indName:NSLocalizedString(@"Flow Collectors", nil) indSize:14];
+    [collectorsValue setTooltipText:NSLocalizedString(@"Number of Collectors", nil)];
+    [self.view addSubview:collectorsValue];
     
     chartView = [[NCIChartView alloc] initWithFrame:
                  CGRectZero andOptions:@{nciTopGraphOptions:@{
@@ -131,6 +135,7 @@
     
     //TODO reorganize this
     [NCIWebSocketConnector interlocutor].editServerView = editServerView;
+    [NCIWebSocketConnector interlocutor].collectorsValue = collectorsValue;
     [NCIWebSocketConnector interlocutor].nciValue = nciValue;
     [NCIWebSocketConnector interlocutor].nepValue = nepValue;
     [NCIWebSocketConnector interlocutor].qpsValue = qpsValue;
@@ -181,7 +186,7 @@
 
 - (void)layoutSubviews {
     int topIndent = 10;
-    int indexLabelHeight = 50;
+    int indexLabelHeight = 55;
     if (isShowingLandscapeView) {
         
     } else {
@@ -193,9 +198,11 @@
     
     nciValue.frame = CGRectMake(0, topIndent + indexLabelHeight, self.view.bounds.size.width/2, indexLabelHeight);
     
-    qpsValue.frame = CGRectMake(self.view.bounds.size.width/2, topIndent + 2*indexLabelHeight + 25, self.view.bounds.size.width/2, indexLabelHeight);
+    qpsValue.frame = CGRectMake(self.view.bounds.size.width/2, topIndent + 3*indexLabelHeight, self.view.bounds.size.width/2, indexLabelHeight);
     
-    nepValue.frame = CGRectMake(self.view.bounds.size.width/2, indexLabelHeight + topIndent, self.view.bounds.size.width/2, indexLabelHeight);
+    nepValue.frame = CGRectMake(self.view.bounds.size.width/2, 2*indexLabelHeight + topIndent, self.view.bounds.size.width/2, indexLabelHeight);
+    
+    collectorsValue.frame = CGRectMake(self.view.bounds.size.width/2, indexLabelHeight + topIndent, self.view.bounds.size.width/2, indexLabelHeight);
     
     switcherPanel.frame  = CGRectMake(20, 200, 500, 40);
     

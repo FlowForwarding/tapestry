@@ -216,7 +216,42 @@ static NSString* websocketMoreDataRequest =
 {
     NSString *messageString = ((NSString *)message);
     NSArray *dataPieces = [[messageString substringWithRange:NSMakeRange(1, messageString.length -2) ] componentsSeparatedByString:@","];
-    if (dataPieces.count > 2){
+    NSDictionary *dataPoint = [NSJSONSerialization
+                               JSONObjectWithData:[message dataUsingEncoding:NSUTF8StringEncoding]
+                               options:NSJSONReadingMutableContainers error:NULL];
+    if ([dataPoint[@"action"] isEqualToString:@"NCI"]){
+        NSString *nci = dataPoint[@"NCI"];
+        self.progressLabel.hidden = YES;
+        [self.nciValue setIndValue:nci withDate:dataPoint[@"Time"]];
+        if (_currentDatePeriod == twoYearPeriod){
+            if (self.chartView.chartData.count > 0)
+                [self.chartView.chartData removeLastObject];
+            [self.chartView addPoint:[[self dateFromServerString: dataPoint[@"Time"]] timeIntervalSince1970] val:@[@([nci integerValue])]];
+            while ([[NSDate date] timeIntervalSince1970] - [self.chartView.chartData[0][0] doubleValue] > _currentDatePeriod){
+                [self.chartView.chartData removeObjectAtIndex:0];
+            }
+            [self.chartView addPoint:[[NSDate date] timeIntervalSince1970] val:@[[NSNull null]]];
+            [self.chartView drawChart];
+        }
+    } else if([dataPoint[@"action"] isEqualToString:@"NEP"]){
+        [self.nepValue setIndValue: dataPoint[@"NEP"] withDate:dataPoint[@"Time"]];
+    } else if([dataPoint[@"action"] isEqualToString:@"QPS"]) {
+        [self.qpsValue setIndValue:dataPoint[@"QPS"] withDate:dataPoint[@"Time"]];
+    } else if([dataPoint[@"action"] isEqualToString:@"Collectors"]){
+        [self.collectorsValue setIndValue:dataPoint[@"COLLECTORS"] withDate:dataPoint[@"Time"]];
+    } else if (dataPoint[@"start_time"]){
+         NSString *start_time = dataPoint[@"start_time"];
+        self.startDate = [self dateFromServerString:start_time];
+        //            NSString *current_time = dataPoint[@"current_time"];
+        //            NSDate *date = [self dateFromServerString:current_time];
+        //            timeAdjustment = [date timeIntervalSinceNow];
+        double askPeriod = [[NSDate date] timeIntervalSince1970] - [self.startDate timeIntervalSince1970];
+        if (askPeriod > twoYearPeriod){
+            askPeriod = twoYearPeriod;
+        }
+        _currentDatePeriod = twoYearPeriod;
+        [self requestLastDataForPeiodInSeconds:askPeriod];
+    } else{
         self.progressLabel.hidden = YES;
         [self.chartView resetChart];
         int i;
@@ -233,46 +268,6 @@ static NSString* websocketMoreDataRequest =
         self.chartView.minRangeVal = self.chartView.maxRangeVal - period /10.0;
         [self.chartView drawChart];
         
-    } else {
-        NSDictionary *dataPoint = [NSJSONSerialization
-                                   JSONObjectWithData:[message dataUsingEncoding:NSUTF8StringEncoding]
-                                   options:NSJSONReadingMutableContainers error:NULL];
-        
-        NSString *nci = dataPoint[@"NCI"];
-        NSString *nep = dataPoint[@"NEP"];
-        NSString *qps = dataPoint[@"QPS"];
-        if (nci){
-            self.progressLabel.hidden = YES;
-            [self.nciValue setIndValue:nci withDate:dataPoint[@"Time"]];
-            if (_currentDatePeriod == twoYearPeriod){
-                if (self.chartView.chartData.count > 0)
-                    [self.chartView.chartData removeLastObject];
-                [self.chartView addPoint:[[self dateFromServerString: dataPoint[@"Time"]] timeIntervalSince1970] val:@[@([nci integerValue])]];
-                while ([[NSDate date] timeIntervalSince1970] - [self.chartView.chartData[0][0] doubleValue] > _currentDatePeriod){
-                    [self.chartView.chartData removeObjectAtIndex:0];
-                }
-                [self.chartView addPoint:[[NSDate date] timeIntervalSince1970] val:@[[NSNull null]]];
-                [self.chartView drawChart];
-            }
-        } else if (nep) {
-            [self.nepValue setIndValue:nep  withDate:dataPoint[@"Time"]];
-        } else if (qps) {
-            [self.qpsValue setIndValue:qps withDate:dataPoint[@"Time"]];
-        }
-        //{"start_time":"2013-11-13T16:42:55Z","current_time":"2013-11-13T21:23:47Z"}
-        NSString *start_time = dataPoint[@"start_time"];
-        if (start_time){
-            self.startDate = [self dateFromServerString:start_time];
-//            NSString *current_time = dataPoint[@"current_time"];
-//            NSDate *date = [self dateFromServerString:current_time];
-//            timeAdjustment = [date timeIntervalSinceNow];
-            double askPeriod = [[NSDate date] timeIntervalSince1970] - [self.startDate timeIntervalSince1970];
-            if (askPeriod > twoYearPeriod){
-                askPeriod = twoYearPeriod;
-            }
-            _currentDatePeriod = twoYearPeriod;
-            [self requestLastDataForPeiodInSeconds:askPeriod];
-        }
     }
 }
 
