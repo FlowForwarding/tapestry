@@ -161,17 +161,25 @@ static NSString* websocketMoreDataRequest =
             }
             trendStepCounter += 1;
             int complexity = trendMiddle + arc4random() % 5;
-            NSDictionary *response = @{@"NCI":[NSString stringWithFormat: @"%d", complexity]
-                                       , @"Time": [self formatDataForServer: [NSDate date]]};
+            NSDictionary *response = @{@"NCI":[NSString stringWithFormat: @"%d", complexity],
+                                       @"Time": [self formatDataForServer: [NSDate date]],
+                                       @"action": @"NCI"};
             [self sendDemoData:response];
             int endpoints = 310 + arc4random() % 5;
             NSDictionary *response2 = @{@"NEP": [NSString stringWithFormat: @"%d", endpoints],
-                                        @"Time": [self formatDataForServer: [NSDate date]]};
+                                        @"Time": [self formatDataForServer: [NSDate date]],
+                                        @"action": @"NEP"};
             [self sendDemoData:response2];
             int quieries  = 230 + arc4random() % 5;
             NSDictionary *response3 = @{@"QPS":[NSString stringWithFormat: @"%d", quieries],
-                                        @"Time": [self formatDataForServer: [NSDate date]]};
+                                        @"Time": [self formatDataForServer: [NSDate date]],
+                                        @"action": @"QPS"};
             [self sendDemoData:response3];
+            int collectors = arc4random() % 4 + 1;
+            NSDictionary *response4 = @{@"COLLECTORS":[NSString stringWithFormat: @"%d", collectors],
+                                        @"Time": [self formatDataForServer: [NSDate date]],
+                                        @"action": @"Collectors"};
+            [self sendDemoData:response4];
             [NSThread sleepForTimeInterval:3.0f];
         }
     });
@@ -251,7 +259,7 @@ static NSString* websocketMoreDataRequest =
         }
         _currentDatePeriod = twoYearPeriod;
         [self requestLastDataForPeiodInSeconds:askPeriod];
-    } else{
+    } else {
         self.progressLabel.hidden = YES;
         [self.chartView resetChart];
         int i;
