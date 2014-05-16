@@ -138,7 +138,7 @@ static NSString* websocketNCIDetailsRequest =
 }
 
 - (void)generateDemoData{
-    float demoDatePeriod = twoYearPeriod/4.0;
+    float demoDatePeriod = halfMonthPeriod;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         int trendMiddle = 6;
         int trendStepCounter = 0;

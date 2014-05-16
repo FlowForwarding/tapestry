@@ -93,7 +93,9 @@
     
     chartView = [[NCIChartView alloc] initWithFrame:
                  CGRectZero andOptions:@{nciTopGraphOptions:@{
-                                                 nciUseDateFormatter: @(YES),
+                                                 nciXAxis: @{
+                                                             nciUseDateFormatter: @YES
+                                                             },
                                                  nciSelPointColors: @[[UIColor tapestryDarkBlue]],
                                                  nciSelPointTextRenderer: ^(double argument , NSArray *values){
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
@@ -102,9 +104,10 @@
                  [dateFormatter stringFromDate: [NSDate dateWithTimeIntervalSince1970:argument]]];
     }
                                                  },
-                                         
                                          nciBottomGraphOptions:@{
-                                                 nciUseDateFormatter: @(YES),
+                                                 nciXAxis: @{
+                                                         nciUseDateFormatter: @YES
+                                                         },
                                                  nciHasSelection:@(NO)
                                                  }}];
     chartView.rangesMoved = ^(){
