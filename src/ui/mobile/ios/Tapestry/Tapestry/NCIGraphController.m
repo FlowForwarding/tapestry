@@ -173,7 +173,7 @@
 }
 
 - (void)showNCIDetails{
-    [[NCIWebSocketConnector interlocutor] requestNCIDetails:collectorsValue.dateServerString];
+    [[NCIWebSocketConnector interlocutor] requestNCIDetails:nciValue.dateServerString];
     nciDetailsView.center = CGPointMake(nciDetailsView.center.x, nciDetailsView.frame.size.height/2);
     [nciDetailsView setContentOffset:CGPointMake(0, nciDetailsView.frame.size.height) animated:YES];
 }

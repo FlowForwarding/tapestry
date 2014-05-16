@@ -32,6 +32,9 @@
 		2A90431B18E392AA008CEBB8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2A90431D18E392AA008CEBB8 /* Localizable.strings */; };
 		2AC7FF9719266CA100EE5DC1 /* NCICollectorsDetailsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AC7FF9619266CA100EE5DC1 /* NCICollectorsDetailsView.m */; };
 		2AC7FF9A1926723B00EE5DC1 /* NCIDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AC7FF991926723B00EE5DC1 /* NCIDetails.m */; };
+		2AC7FF9D1926B0F800EE5DC1 /* NCITabButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AC7FF9C1926B0F800EE5DC1 /* NCITabButton.m */; };
+		2AC7FFA91926BD5000EE5DC1 /* NCIFlowsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AC7FFA81926BD5000EE5DC1 /* NCIFlowsView.m */; };
+		2AC7FFAC1926BD6600EE5DC1 /* NCIAcitvitiesSizesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AC7FFAB1926BD6600EE5DC1 /* NCIAcitvitiesSizesView.m */; };
 		2AF134E0185E31E50087D685 /* UIColor+WithHex.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AF134DF185E31E50087D685 /* UIColor+WithHex.m */; };
 		BF1E73678289457C8D232F84 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 06D5AAF19A074DA0BABE9A8B /* libPods.a */; };
 /* End PBXBuildFile section */
@@ -92,6 +95,12 @@
 		2AC7FF9619266CA100EE5DC1 /* NCICollectorsDetailsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NCICollectorsDetailsView.m; sourceTree = "<group>"; };
 		2AC7FF981926723B00EE5DC1 /* NCIDetails.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCIDetails.h; sourceTree = "<group>"; };
 		2AC7FF991926723B00EE5DC1 /* NCIDetails.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NCIDetails.m; sourceTree = "<group>"; };
+		2AC7FF9B1926B0F800EE5DC1 /* NCITabButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCITabButton.h; sourceTree = "<group>"; };
+		2AC7FF9C1926B0F800EE5DC1 /* NCITabButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NCITabButton.m; sourceTree = "<group>"; };
+		2AC7FFA71926BD5000EE5DC1 /* NCIFlowsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCIFlowsView.h; sourceTree = "<group>"; };
+		2AC7FFA81926BD5000EE5DC1 /* NCIFlowsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NCIFlowsView.m; sourceTree = "<group>"; };
+		2AC7FFAA1926BD6600EE5DC1 /* NCIAcitvitiesSizesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCIAcitvitiesSizesView.h; sourceTree = "<group>"; };
+		2AC7FFAB1926BD6600EE5DC1 /* NCIAcitvitiesSizesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NCIAcitvitiesSizesView.m; sourceTree = "<group>"; };
 		2AF134DE185E31E50087D685 /* UIColor+WithHex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+WithHex.h"; sourceTree = "<group>"; };
 		2AF134DF185E31E50087D685 /* UIColor+WithHex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+WithHex.m"; sourceTree = "<group>"; };
 		873D91FA5DF341DBB1741EE2 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
@@ -227,6 +236,12 @@
 				2AC7FF9619266CA100EE5DC1 /* NCICollectorsDetailsView.m */,
 				2AC7FF981926723B00EE5DC1 /* NCIDetails.h */,
 				2AC7FF991926723B00EE5DC1 /* NCIDetails.m */,
+				2AC7FF9B1926B0F800EE5DC1 /* NCITabButton.h */,
+				2AC7FF9C1926B0F800EE5DC1 /* NCITabButton.m */,
+				2AC7FFA71926BD5000EE5DC1 /* NCIFlowsView.h */,
+				2AC7FFA81926BD5000EE5DC1 /* NCIFlowsView.m */,
+				2AC7FFAA1926BD6600EE5DC1 /* NCIAcitvitiesSizesView.h */,
+				2AC7FFAB1926BD6600EE5DC1 /* NCIAcitvitiesSizesView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -373,11 +388,14 @@
 				2A02D0571844F1BF0065B0E9 /* NCIHintView.m in Sources */,
 				2AF134E0185E31E50087D685 /* UIColor+WithHex.m in Sources */,
 				2A3BBB0D18576EBF006ECC2B /* NCIConstants.m in Sources */,
+				2AC7FF9D1926B0F800EE5DC1 /* NCITabButton.m in Sources */,
+				2AC7FFA91926BD5000EE5DC1 /* NCIFlowsView.m in Sources */,
 				2AC7FF9A1926723B00EE5DC1 /* NCIDetails.m in Sources */,
 				2A02D0591844F1BF0065B0E9 /* NCIPeriodSwitcher.m in Sources */,
 				2A02D05A1844F1BF0065B0E9 /* NCIPeriodSwitcherPanel.m in Sources */,
 				2A1B29A31925E111006CC710 /* NCIDetailsView.m in Sources */,
 				2A02D0561844F1BF0065B0E9 /* NCIHelpView.m in Sources */,
+				2AC7FFAC1926BD6600EE5DC1 /* NCIAcitvitiesSizesView.m in Sources */,
 				2A02D0581844F1BF0065B0E9 /* NCIIndexValueView.m in Sources */,
 				2A02D0131844F16C0065B0E9 /* main.m in Sources */,
 				2A02D0551844F1BF0065B0E9 /* NCIEditServerView.m in Sources */,
