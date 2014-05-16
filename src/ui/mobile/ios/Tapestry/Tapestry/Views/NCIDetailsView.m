@@ -9,7 +9,7 @@
 #import "NCIDetailsView.h"
 
 @interface NCIDetailsView(){
-
+    UILabel *generalInfo;
 }
 @end
 
@@ -48,8 +48,21 @@
         activitiesSizesButton.backgroundColor = btnColor;
         [self.content addSubview:activitiesSizesButton];
         
+        generalInfo = [[UILabel alloc] initWithFrame:CGRectMake(0, 50, self.content.frame.size.width, 50)];
+        generalInfo.textAlignment = NSTextAlignmentCenter;
+        [self.content addSubview:generalInfo];
+        
     }
     return self;
+}
+
+- (void)loadData:(NSDictionary *)data{
+    generalInfo.text = [NSString stringWithFormat:@"Network Complexity Index at %@ is %@",
+                    [NCIConstants processTime:data[@"Time"]], data[@"NCI"]];
+}
+
+- (void)hideActions{
+    generalInfo.text = @"";
 }
 
 

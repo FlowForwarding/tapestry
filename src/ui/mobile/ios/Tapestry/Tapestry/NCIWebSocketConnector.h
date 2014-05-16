@@ -13,6 +13,7 @@
 #import "NCIEditServerView.h"
 #import "NCIChartView.h"
 #import "NCICollectorsDetailsView.h"
+#import "NCIDetailsView.h"
 #import "NCIPeriodSwitcherPanel.h"
 
 @interface NCIWebSocketConnector : NSObject
@@ -23,6 +24,7 @@
 - (void)resetData;
 - (void)requestLastDataForPeiodInSeconds:(float) period;
 - (void)requestCollecotrsDetails:(NSString *) date;
+- (void)requestNCIDetails:(NSString *) date;
 
 - (void)newTapestryUrl:(NSString *) newUrl;
 - (NSString *)getTapestryUrl;
@@ -37,6 +39,7 @@
 @property(nonatomic, strong) NCIChartView *chartView;
 @property(nonatomic, strong) NCIPeriodSwitcherPanel *periodSwitcherPanel;
 @property(nonatomic, strong) NCICollectorsDetailsView *collectorsDetailsView;
+@property(nonatomic, strong) NCIDetailsView *detailsView;
 @property(nonatomic, strong) UIButton *noConnection;
 @property(nonatomic, strong) UILabel *progressLabel;
 

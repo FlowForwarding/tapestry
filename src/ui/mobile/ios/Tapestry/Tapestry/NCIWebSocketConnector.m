@@ -30,6 +30,8 @@ static NSString* websocketMoreDataRequest =
 @"{\"request\":\"more_data\",\"start\": \"%@Z\",\"end\": \"%@Z\",\"max_items\": \"800\"}";
 static NSString* websocketCollectorsDetailsRequest =
 @"{\"action\":\"collectors\",\"Time\": \"%@Z\"}";
+static NSString* websocketNCIDetailsRequest =
+@"{\"action\":\"NCIDetails\",\"Time\": \"%@Z\"}";
 
 @implementation NCIWebSocketConnector
 
@@ -100,6 +102,10 @@ static NSString* websocketCollectorsDetailsRequest =
 
 - (void)requestCollecotrsDetails:(NSString *) date{
     [socket send: [NSString stringWithFormat: websocketCollectorsDetailsRequest, date]];
+}
+
+- (void)requestNCIDetails:(NSString *) date{
+    [socket send: [NSString stringWithFormat: websocketNCIDetailsRequest, date]];
 }
 
 - (void)resetData{
@@ -255,7 +261,9 @@ static NSString* websocketCollectorsDetailsRequest =
         [self.collectorsValue setIndValue:dataPoint[@"COLLECTORS"] withDate:dataPoint[@"Time"]];
     } else if([dataPoint[@"action"] isEqualToString:@"collectors"]){
         [self.collectorsDetailsView loadData:dataPoint];
-    } else if (dataPoint[@"start_time"]){
+    } else if([dataPoint[@"action"] isEqualToString:@"NCIDetails"]){
+        [self.detailsView loadData:dataPoint];
+    } else if(dataPoint[@"start_time"]){
          NSString *start_time = dataPoint[@"start_time"];
         self.startDate = [self dateFromServerString:start_time];
         //            NSString *current_time = dataPoint[@"current_time"];

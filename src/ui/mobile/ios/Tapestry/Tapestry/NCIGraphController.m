@@ -154,6 +154,7 @@
     [NCIWebSocketConnector interlocutor].periodSwitcherPanel = switcherPanel;
     [NCIWebSocketConnector interlocutor].progressLabel = progressLabel;
     [NCIWebSocketConnector interlocutor].collectorsDetailsView = collectorsDetailsView;
+    [NCIWebSocketConnector interlocutor].detailsView = nciDetailsView;
     [[NCIWebSocketConnector interlocutor] reconnect];
     
     isShowingLandscapeView = NO;
@@ -172,6 +173,7 @@
 }
 
 - (void)showNCIDetails{
+    [[NCIWebSocketConnector interlocutor] requestNCIDetails:collectorsValue.dateServerString];
     nciDetailsView.center = CGPointMake(nciDetailsView.center.x, nciDetailsView.frame.size.height/2);
     [nciDetailsView setContentOffset:CGPointMake(0, nciDetailsView.frame.size.height) animated:YES];
 }

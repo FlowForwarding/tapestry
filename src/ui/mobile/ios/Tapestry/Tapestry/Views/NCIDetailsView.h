@@ -10,4 +10,6 @@
 
 @interface NCIDetailsView : NCIDetails
 
+- (void)loadData:(NSDictionary *)data;
+
 @end
