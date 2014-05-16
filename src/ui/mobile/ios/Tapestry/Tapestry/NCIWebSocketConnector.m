@@ -254,7 +254,7 @@ static NSString* websocketCollectorsDetailsRequest =
     } else if([dataPoint[@"action"] isEqualToString:@"Collectors"]){
         [self.collectorsValue setIndValue:dataPoint[@"COLLECTORS"] withDate:dataPoint[@"Time"]];
     } else if([dataPoint[@"action"] isEqualToString:@"collectors"]){
-        self.collectorsDetailsView.collectors = dataPoint[@"Collectors"];
+        [self.collectorsDetailsView loadData:dataPoint];
     } else if (dataPoint[@"start_time"]){
          NSString *start_time = dataPoint[@"start_time"];
         self.startDate = [self dateFromServerString:start_time];

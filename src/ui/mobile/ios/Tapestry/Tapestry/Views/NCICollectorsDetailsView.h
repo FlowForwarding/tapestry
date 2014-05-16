@@ -10,6 +10,6 @@
 
 @interface NCICollectorsDetailsView : NCIDetails
 
-@property(nonatomic, strong) NSArray *collectors;
+- (void)loadData:(NSDictionary *)data;
 
 @end

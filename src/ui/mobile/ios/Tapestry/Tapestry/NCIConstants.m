@@ -16,4 +16,14 @@ NSString *const demoUrl = @"demo";
 NSString *const sampleUrl = @"nci.example.com:28080/clientsock.yaws";
 float twoYearPeriod = 60*60*24*30*12*2;
 
++ (NSString *)processTime:(NSString *) time{
+    NSDateFormatter *serverDateformatter  = [[NSDateFormatter alloc] init];
+    [serverDateformatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    time = [[time stringByReplacingOccurrencesOfString:@"T" withString:@" "] stringByReplacingOccurrencesOfString:@"Z" withString:@""];
+    [serverDateformatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
+    NSDate *date = [serverDateformatter dateFromString:time];
+    [serverDateformatter setTimeZone:[NSTimeZone  localTimeZone]];
+    return [serverDateformatter stringFromDate:date];
+}
+
 @end

@@ -18,8 +18,10 @@
         _content = [[UIView alloc] initWithFrame:CGRectMake(0, self.frame.size.height, self.frame.size.width, self.frame.size.height)];
         [self addSubview:_content];
         _content.backgroundColor = [UIColor whiteColor];
+        _content.layer.cornerRadius = 5;
         self.pagingEnabled = YES;
         self.delegate = self;
+        self.layer.cornerRadius = 5;
         self.showsVerticalScrollIndicator = NO;
     }
     return self;
