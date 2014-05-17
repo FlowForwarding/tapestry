@@ -35,6 +35,20 @@
 		2AC7FF9D1926B0F800EE5DC1 /* NCITabButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AC7FF9C1926B0F800EE5DC1 /* NCITabButton.m */; };
 		2AC7FFA91926BD5000EE5DC1 /* NCIFlowsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AC7FFA81926BD5000EE5DC1 /* NCIFlowsView.m */; };
 		2AC7FFAC1926BD6600EE5DC1 /* NCIAcitvitiesSizesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AC7FFAB1926BD6600EE5DC1 /* NCIAcitvitiesSizesView.m */; };
+		2AC7FFCA1926D4F100EE5DC1 /* NCIAxis.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AC7FFAF1926D4F100EE5DC1 /* NCIAxis.m */; };
+		2AC7FFCB1926D4F100EE5DC1 /* NCIBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AC7FFB11926D4F100EE5DC1 /* NCIBar.m */; };
+		2AC7FFCC1926D4F100EE5DC1 /* NCIBarGraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AC7FFB31926D4F100EE5DC1 /* NCIBarGraphView.m */; };
+		2AC7FFCD1926D4F100EE5DC1 /* NCIBarGridView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AC7FFB51926D4F100EE5DC1 /* NCIBarGridView.m */; };
+		2AC7FFCE1926D4F100EE5DC1 /* NCIBtmGraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AC7FFB71926D4F100EE5DC1 /* NCIBtmGraphView.m */; };
+		2AC7FFCF1926D4F100EE5DC1 /* NCIChartOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AC7FFB91926D4F100EE5DC1 /* NCIChartOptions.m */; };
+		2AC7FFD01926D4F100EE5DC1 /* NCIChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AC7FFBB1926D4F100EE5DC1 /* NCIChartView.m */; };
+		2AC7FFD11926D4F100EE5DC1 /* NCIHandspikeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AC7FFBD1926D4F100EE5DC1 /* NCIHandspikeView.m */; };
+		2AC7FFD21926D4F100EE5DC1 /* NCILine.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AC7FFBF1926D4F100EE5DC1 /* NCILine.m */; };
+		2AC7FFD31926D4F100EE5DC1 /* NCISimpleChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AC7FFC11926D4F100EE5DC1 /* NCISimpleChartView.m */; };
+		2AC7FFD41926D4F100EE5DC1 /* NCISimpleGraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AC7FFC31926D4F100EE5DC1 /* NCISimpleGraphView.m */; };
+		2AC7FFD51926D4F100EE5DC1 /* NCISimpleGridView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AC7FFC51926D4F100EE5DC1 /* NCISimpleGridView.m */; };
+		2AC7FFD61926D4F100EE5DC1 /* NCITopGraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AC7FFC71926D4F100EE5DC1 /* NCITopGraphView.m */; };
+		2AC7FFD71926D4F100EE5DC1 /* NCIZoomGraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AC7FFC91926D4F100EE5DC1 /* NCIZoomGraphView.m */; };
 		2AF134E0185E31E50087D685 /* UIColor+WithHex.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AF134DF185E31E50087D685 /* UIColor+WithHex.m */; };
 		BF1E73678289457C8D232F84 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 06D5AAF19A074DA0BABE9A8B /* libPods.a */; };
 /* End PBXBuildFile section */
@@ -101,6 +115,34 @@
 		2AC7FFA81926BD5000EE5DC1 /* NCIFlowsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NCIFlowsView.m; sourceTree = "<group>"; };
 		2AC7FFAA1926BD6600EE5DC1 /* NCIAcitvitiesSizesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCIAcitvitiesSizesView.h; sourceTree = "<group>"; };
 		2AC7FFAB1926BD6600EE5DC1 /* NCIAcitvitiesSizesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NCIAcitvitiesSizesView.m; sourceTree = "<group>"; };
+		2AC7FFAE1926D4F100EE5DC1 /* NCIAxis.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCIAxis.h; sourceTree = "<group>"; };
+		2AC7FFAF1926D4F100EE5DC1 /* NCIAxis.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NCIAxis.m; sourceTree = "<group>"; };
+		2AC7FFB01926D4F100EE5DC1 /* NCIBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCIBar.h; sourceTree = "<group>"; };
+		2AC7FFB11926D4F100EE5DC1 /* NCIBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NCIBar.m; sourceTree = "<group>"; };
+		2AC7FFB21926D4F100EE5DC1 /* NCIBarGraphView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCIBarGraphView.h; sourceTree = "<group>"; };
+		2AC7FFB31926D4F100EE5DC1 /* NCIBarGraphView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NCIBarGraphView.m; sourceTree = "<group>"; };
+		2AC7FFB41926D4F100EE5DC1 /* NCIBarGridView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCIBarGridView.h; sourceTree = "<group>"; };
+		2AC7FFB51926D4F100EE5DC1 /* NCIBarGridView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NCIBarGridView.m; sourceTree = "<group>"; };
+		2AC7FFB61926D4F100EE5DC1 /* NCIBtmGraphView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCIBtmGraphView.h; sourceTree = "<group>"; };
+		2AC7FFB71926D4F100EE5DC1 /* NCIBtmGraphView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NCIBtmGraphView.m; sourceTree = "<group>"; };
+		2AC7FFB81926D4F100EE5DC1 /* NCIChartOptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCIChartOptions.h; sourceTree = "<group>"; };
+		2AC7FFB91926D4F100EE5DC1 /* NCIChartOptions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NCIChartOptions.m; sourceTree = "<group>"; };
+		2AC7FFBA1926D4F100EE5DC1 /* NCIChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCIChartView.h; sourceTree = "<group>"; };
+		2AC7FFBB1926D4F100EE5DC1 /* NCIChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NCIChartView.m; sourceTree = "<group>"; };
+		2AC7FFBC1926D4F100EE5DC1 /* NCIHandspikeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCIHandspikeView.h; sourceTree = "<group>"; };
+		2AC7FFBD1926D4F100EE5DC1 /* NCIHandspikeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NCIHandspikeView.m; sourceTree = "<group>"; };
+		2AC7FFBE1926D4F100EE5DC1 /* NCILine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCILine.h; sourceTree = "<group>"; };
+		2AC7FFBF1926D4F100EE5DC1 /* NCILine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NCILine.m; sourceTree = "<group>"; };
+		2AC7FFC01926D4F100EE5DC1 /* NCISimpleChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCISimpleChartView.h; sourceTree = "<group>"; };
+		2AC7FFC11926D4F100EE5DC1 /* NCISimpleChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NCISimpleChartView.m; sourceTree = "<group>"; };
+		2AC7FFC21926D4F100EE5DC1 /* NCISimpleGraphView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCISimpleGraphView.h; sourceTree = "<group>"; };
+		2AC7FFC31926D4F100EE5DC1 /* NCISimpleGraphView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NCISimpleGraphView.m; sourceTree = "<group>"; };
+		2AC7FFC41926D4F100EE5DC1 /* NCISimpleGridView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCISimpleGridView.h; sourceTree = "<group>"; };
+		2AC7FFC51926D4F100EE5DC1 /* NCISimpleGridView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NCISimpleGridView.m; sourceTree = "<group>"; };
+		2AC7FFC61926D4F100EE5DC1 /* NCITopGraphView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCITopGraphView.h; sourceTree = "<group>"; };
+		2AC7FFC71926D4F100EE5DC1 /* NCITopGraphView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NCITopGraphView.m; sourceTree = "<group>"; };
+		2AC7FFC81926D4F100EE5DC1 /* NCIZoomGraphView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCIZoomGraphView.h; sourceTree = "<group>"; };
+		2AC7FFC91926D4F100EE5DC1 /* NCIZoomGraphView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NCIZoomGraphView.m; sourceTree = "<group>"; };
 		2AF134DE185E31E50087D685 /* UIColor+WithHex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+WithHex.h"; sourceTree = "<group>"; };
 		2AF134DF185E31E50087D685 /* UIColor+WithHex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+WithHex.m"; sourceTree = "<group>"; };
 		873D91FA5DF341DBB1741EE2 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
@@ -168,6 +210,7 @@
 		2A02D00C1844F16C0065B0E9 /* Tapestry */ = {
 			isa = PBXGroup;
 			children = (
+				2AC7FFAD1926D4F100EE5DC1 /* views */,
 				2A02D0481844F1BF0065B0E9 /* Views */,
 				2A02D0151844F16C0065B0E9 /* NCIAppDelegate.h */,
 				2A02D0161844F16C0065B0E9 /* NCIAppDelegate.m */,
@@ -244,6 +287,42 @@
 				2AC7FFAB1926BD6600EE5DC1 /* NCIAcitvitiesSizesView.m */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		2AC7FFAD1926D4F100EE5DC1 /* views */ = {
+			isa = PBXGroup;
+			children = (
+				2AC7FFAE1926D4F100EE5DC1 /* NCIAxis.h */,
+				2AC7FFAF1926D4F100EE5DC1 /* NCIAxis.m */,
+				2AC7FFB01926D4F100EE5DC1 /* NCIBar.h */,
+				2AC7FFB11926D4F100EE5DC1 /* NCIBar.m */,
+				2AC7FFB21926D4F100EE5DC1 /* NCIBarGraphView.h */,
+				2AC7FFB31926D4F100EE5DC1 /* NCIBarGraphView.m */,
+				2AC7FFB41926D4F100EE5DC1 /* NCIBarGridView.h */,
+				2AC7FFB51926D4F100EE5DC1 /* NCIBarGridView.m */,
+				2AC7FFB61926D4F100EE5DC1 /* NCIBtmGraphView.h */,
+				2AC7FFB71926D4F100EE5DC1 /* NCIBtmGraphView.m */,
+				2AC7FFB81926D4F100EE5DC1 /* NCIChartOptions.h */,
+				2AC7FFB91926D4F100EE5DC1 /* NCIChartOptions.m */,
+				2AC7FFBA1926D4F100EE5DC1 /* NCIChartView.h */,
+				2AC7FFBB1926D4F100EE5DC1 /* NCIChartView.m */,
+				2AC7FFBC1926D4F100EE5DC1 /* NCIHandspikeView.h */,
+				2AC7FFBD1926D4F100EE5DC1 /* NCIHandspikeView.m */,
+				2AC7FFBE1926D4F100EE5DC1 /* NCILine.h */,
+				2AC7FFBF1926D4F100EE5DC1 /* NCILine.m */,
+				2AC7FFC01926D4F100EE5DC1 /* NCISimpleChartView.h */,
+				2AC7FFC11926D4F100EE5DC1 /* NCISimpleChartView.m */,
+				2AC7FFC21926D4F100EE5DC1 /* NCISimpleGraphView.h */,
+				2AC7FFC31926D4F100EE5DC1 /* NCISimpleGraphView.m */,
+				2AC7FFC41926D4F100EE5DC1 /* NCISimpleGridView.h */,
+				2AC7FFC51926D4F100EE5DC1 /* NCISimpleGridView.m */,
+				2AC7FFC61926D4F100EE5DC1 /* NCITopGraphView.h */,
+				2AC7FFC71926D4F100EE5DC1 /* NCITopGraphView.m */,
+				2AC7FFC81926D4F100EE5DC1 /* NCIZoomGraphView.h */,
+				2AC7FFC91926D4F100EE5DC1 /* NCIZoomGraphView.m */,
+			);
+			name = views;
+			path = ../../../../../../../dynamiccharts/NCIChart/views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -383,23 +462,37 @@
 			buildActionMask = 2147483647;
 			files = (
 				2AC7FF9719266CA100EE5DC1 /* NCICollectorsDetailsView.m in Sources */,
+				2AC7FFD11926D4F100EE5DC1 /* NCIHandspikeView.m in Sources */,
+				2AC7FFD41926D4F100EE5DC1 /* NCISimpleGraphView.m in Sources */,
 				2A02D07F1844F2210065B0E9 /* NCIWebSocketConnector.m in Sources */,
 				2A02D07E1844F2210065B0E9 /* NCIGraphController.m in Sources */,
+				2AC7FFD51926D4F100EE5DC1 /* NCISimpleGridView.m in Sources */,
 				2A02D0571844F1BF0065B0E9 /* NCIHintView.m in Sources */,
+				2AC7FFD21926D4F100EE5DC1 /* NCILine.m in Sources */,
+				2AC7FFCF1926D4F100EE5DC1 /* NCIChartOptions.m in Sources */,
 				2AF134E0185E31E50087D685 /* UIColor+WithHex.m in Sources */,
 				2A3BBB0D18576EBF006ECC2B /* NCIConstants.m in Sources */,
+				2AC7FFCA1926D4F100EE5DC1 /* NCIAxis.m in Sources */,
+				2AC7FFCC1926D4F100EE5DC1 /* NCIBarGraphView.m in Sources */,
 				2AC7FF9D1926B0F800EE5DC1 /* NCITabButton.m in Sources */,
 				2AC7FFA91926BD5000EE5DC1 /* NCIFlowsView.m in Sources */,
 				2AC7FF9A1926723B00EE5DC1 /* NCIDetails.m in Sources */,
+				2AC7FFCE1926D4F100EE5DC1 /* NCIBtmGraphView.m in Sources */,
+				2AC7FFCB1926D4F100EE5DC1 /* NCIBar.m in Sources */,
+				2AC7FFD31926D4F100EE5DC1 /* NCISimpleChartView.m in Sources */,
 				2A02D0591844F1BF0065B0E9 /* NCIPeriodSwitcher.m in Sources */,
 				2A02D05A1844F1BF0065B0E9 /* NCIPeriodSwitcherPanel.m in Sources */,
 				2A1B29A31925E111006CC710 /* NCIDetailsView.m in Sources */,
+				2AC7FFD01926D4F100EE5DC1 /* NCIChartView.m in Sources */,
 				2A02D0561844F1BF0065B0E9 /* NCIHelpView.m in Sources */,
 				2AC7FFAC1926BD6600EE5DC1 /* NCIAcitvitiesSizesView.m in Sources */,
+				2AC7FFD71926D4F100EE5DC1 /* NCIZoomGraphView.m in Sources */,
+				2AC7FFCD1926D4F100EE5DC1 /* NCIBarGridView.m in Sources */,
 				2A02D0581844F1BF0065B0E9 /* NCIIndexValueView.m in Sources */,
 				2A02D0131844F16C0065B0E9 /* main.m in Sources */,
 				2A02D0551844F1BF0065B0E9 /* NCIEditServerView.m in Sources */,
 				2A02D0171844F16C0065B0E9 /* NCIAppDelegate.m in Sources */,
+				2AC7FFD61926D4F100EE5DC1 /* NCITopGraphView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

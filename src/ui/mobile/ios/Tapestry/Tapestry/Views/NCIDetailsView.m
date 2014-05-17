@@ -83,6 +83,7 @@
         
         _activitySizesView = [[NCIAcitvitiesSizesView alloc]
                               initWithFrame:CGRectMake(0, 100, self.frame.size.width, self.frame.size.height - 100)];
+        _activitySizesView.hidden = YES;
         [self.content addSubview:_activitySizesView];
         _flowsView = [[NCIFlowsView alloc]
                       initWithFrame:CGRectMake(0, 100, self.frame.size.width, self.frame.size.height - 100)];

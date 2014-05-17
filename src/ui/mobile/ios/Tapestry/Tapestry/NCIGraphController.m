@@ -176,13 +176,15 @@
 }
 
 - (void)showNCIDetails{
-    [[NCIWebSocketConnector interlocutor] requestNCIDetails:nciValue.dateServerString];
+    if (nciValue.dateServerString)
+        [[NCIWebSocketConnector interlocutor] requestNCIDetails:nciValue.dateServerString];
     nciDetailsView.center = CGPointMake(nciDetailsView.center.x, nciDetailsView.frame.size.height/2);
     [nciDetailsView setContentOffset:CGPointMake(0, nciDetailsView.frame.size.height) animated:YES];
 }
 
 - (void)showCollectorsDetails{
-    [[NCIWebSocketConnector interlocutor] requestCollecotrsDetails:collectorsValue.dateServerString];
+    if (collectorsValue.dateServerString)
+        [[NCIWebSocketConnector interlocutor] requestCollecotrsDetails:collectorsValue.dateServerString];
     collectorsDetailsView.center = CGPointMake(collectorsDetailsView.center.x, collectorsDetailsView.frame.size.height/2);
     [collectorsDetailsView setContentOffset:CGPointMake(0, collectorsDetailsView.frame.size.height) animated:YES];
 }

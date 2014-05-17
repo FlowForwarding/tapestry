@@ -7,6 +7,8 @@
 //
 
 #import "NCIAcitvitiesSizesView.h"
+#import "NCISimpleChartView.h"
+#import "NCIBarGraphView.h"
 
 @implementation NCIAcitvitiesSizesView
 
@@ -14,7 +16,16 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        //self.backgroundColor = [UIColor redColor];
+        NCISimpleChartView *barChart =  [[NCISimpleChartView alloc] initWithFrame:
+                                         CGRectMake(100, 100, self.frame.size.width - 200, self.frame.size.height -200)
+                                                                       andOptions:@{nciGraphRenderer: [NCIBarGraphView class]}
+                                         ];
+        
+        [self addSubview:barChart];
+        
+        for (int ind = 1; ind < 10; ind ++){
+            [barChart addPoint:ind val:@[@(-arc4random() % 5)]];
+        }
     }
     return self;
 }

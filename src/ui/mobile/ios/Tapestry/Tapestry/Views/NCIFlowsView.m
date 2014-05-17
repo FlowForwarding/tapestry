@@ -14,7 +14,10 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-       // self.backgroundColor = [UIColor purpleColor];
+        UILabel *label = [[UILabel alloc] initWithFrame:self.bounds];
+        label.textAlignment = NSTextAlignmentCenter;
+        label.text = @"Connetions graph here";
+        [self addSubview:label];
     }
     return self;
 }
