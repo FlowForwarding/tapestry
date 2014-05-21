@@ -101,11 +101,52 @@ static NSString* websocketNCIDetailsRequest =
 }
 
 - (void)requestCollecotrsDetails:(NSString *) date{
-    [socket send: [NSString stringWithFormat: websocketCollectorsDetailsRequest, date]];
+    if (demoMode){
+        NSMutableArray *collecotrs = [[NSMutableArray alloc] init];
+        for (int i = 1; i<8; i++){
+            [collecotrs addObject:@{
+                                    @"name": [NSString stringWithFormat:@"collector %d", i],
+                                    @"collector_type": @"switch",
+                                    @"ip": @"",
+                                    @"datapath_id": @"",
+                                    @"qps": [NSString stringWithFormat:@"%d", arc4random() % 5 + 1]}];
+        }
+        NSData *responseData = [NSJSONSerialization
+                                dataWithJSONObject:@{
+                                                     @"action": @"collectors",
+                                                     @"Time": date,
+                                                     @"Collectors" : collecotrs
+                                                     }
+                                options:0 error:nil];
+        [self webSocket:nil didReceiveMessage: [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding]];
+    } else {
+       [socket send: [NSString stringWithFormat: websocketCollectorsDetailsRequest, date]];
+    }
 }
 
 - (void)requestNCIDetails:(NSString *) date{
-    [socket send: [NSString stringWithFormat: websocketNCIDetailsRequest, date]];
+    if (demoMode){
+        NSMutableArray *communities = [[NSMutableArray alloc] init];
+        for (int i = 0; i< (arc4random()%3 + 3); i ++){
+            NSMutableArray *endpoints = [[NSMutableArray alloc] init];
+            for (int i=0; i< (arc4random() % 5 + 2); i ++){
+                [endpoints addObject:@"123"];
+            }
+            NSMutableArray *interactions = [[NSMutableArray alloc] init];
+            [communities addObject:@{@"Endpoints": endpoints, @"Interactions": interactions}];
+        }
+        NSData *responseData = [NSJSONSerialization
+                                dataWithJSONObject:@{
+                                                     @"action": @"NCIDetails",
+                                                     @"NCI": @3,
+                                                     @"Time": date,
+                                                     @"Communities": communities
+                                                     }
+                                options:0 error:nil];
+        [self webSocket:nil didReceiveMessage: [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding]];
+    } else {
+        [socket send: [NSString stringWithFormat: websocketNCIDetailsRequest, date]];
+    }
 }
 
 - (void)resetData{
@@ -152,12 +193,12 @@ static NSString* websocketNCIDetailsRequest =
         float step = demoDatePeriod/(numOfPoints - 1);
         int ind;
         for (ind = 0; ind < numOfPoints; ind ++){
-            if (trendStepCounter > 5){
+            if (trendStepCounter > 140){
                 trendStepCounter = 0;
                 trendMiddle += 1;
             }
             trendStepCounter += 1;
-            int complexity = trendMiddle + arc4random() % 5;
+            int complexity = trendMiddle + arc4random() % 3;
             moreResponse = [NSString stringWithFormat:@"%@\"Time\":\"%@\",\"NCI\":%d,",
                             moreResponse,
                             [self formatDataForServer:[[NSDate date] dateByAddingTimeInterval: (-demoDatePeriod + step*ind)]],
@@ -167,12 +208,12 @@ static NSString* websocketNCIDetailsRequest =
         [self sendDemoString:moreResponse];
         
         while (demoMode){
-            if (trendStepCounter > 5){
+            if (trendStepCounter > 140){
                 trendStepCounter = 0;
                 trendMiddle += 1;
             }
             trendStepCounter += 1;
-            int complexity = trendMiddle + arc4random() % 5;
+            int complexity = trendMiddle + arc4random() % 3;
             NSDictionary *response = @{@"NCI":[NSString stringWithFormat: @"%d", complexity],
                                        @"Time": [self formatDataForServer: [NSDate date]],
                                        @"action": @"NCI"};

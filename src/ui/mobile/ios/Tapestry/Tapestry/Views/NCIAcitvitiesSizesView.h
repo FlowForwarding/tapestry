@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "NCISimpleChartView.h"
 
 @interface NCIAcitvitiesSizesView : UIView
+
+- (void)loadData:(NSArray *) communities;
 
 @end
