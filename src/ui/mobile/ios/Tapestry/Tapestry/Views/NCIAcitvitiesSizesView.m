@@ -37,7 +37,7 @@
 
 - (void)loadData:(NSArray *) communities{
     [_barChart.chartData removeAllObjects];
-    for (int i=1; i< communities.count; i++){
+    for (int i=0; i< communities.count; i++){
         NSDictionary* community = communities[i];
         [_barChart addPoint:i val:@[@(((NSArray *)community[@"Endpoints"]).count)]];
     }

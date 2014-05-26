@@ -129,6 +129,7 @@
 
 - (void)loadData:(NSDictionary *)data{
     communities = data[@"Communities"];
+    [self.flowsView loadData:communities];
     [self.activitySizesView loadData:communities];
     generalInfo.text = [NSString stringWithFormat:@"Network Complexity Index at %@ is %@",
                     [NCIConstants processTime:data[@"Time"]], data[@"NCI"]];

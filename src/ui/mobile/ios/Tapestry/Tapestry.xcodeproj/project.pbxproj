@@ -30,6 +30,7 @@
 		2A1B29A31925E111006CC710 /* NCIDetailsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A1B29A21925E111006CC710 /* NCIDetailsView.m */; };
 		2A3BBB0D18576EBF006ECC2B /* NCIConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A3BBB0C18576EBF006ECC2B /* NCIConstants.m */; };
 		2A90431B18E392AA008CEBB8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2A90431D18E392AA008CEBB8 /* Localizable.strings */; };
+		2AA6782919301BE500AD1C61 /* NCIEndpoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AA6782819301BE500AD1C61 /* NCIEndpoint.m */; };
 		2AC7FF9719266CA100EE5DC1 /* NCICollectorsDetailsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AC7FF9619266CA100EE5DC1 /* NCICollectorsDetailsView.m */; };
 		2AC7FF9A1926723B00EE5DC1 /* NCIDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AC7FF991926723B00EE5DC1 /* NCIDetails.m */; };
 		2AC7FF9D1926B0F800EE5DC1 /* NCITabButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AC7FF9C1926B0F800EE5DC1 /* NCITabButton.m */; };
@@ -105,6 +106,8 @@
 		2A6DDE0A1864523B0013D202 /* libNCIChart.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libNCIChart.a; path = "NCIChart/build/Debug-iphoneos/libNCIChart.a"; sourceTree = "<group>"; };
 		2A90431C18E392AA008CEBB8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		2A90431E18E392BA008CEBB8 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
+		2AA6782719301BE500AD1C61 /* NCIEndpoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCIEndpoint.h; sourceTree = "<group>"; };
+		2AA6782819301BE500AD1C61 /* NCIEndpoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NCIEndpoint.m; sourceTree = "<group>"; };
 		2AC7FF9519266CA100EE5DC1 /* NCICollectorsDetailsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCICollectorsDetailsView.h; sourceTree = "<group>"; };
 		2AC7FF9619266CA100EE5DC1 /* NCICollectorsDetailsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NCICollectorsDetailsView.m; sourceTree = "<group>"; };
 		2AC7FF981926723B00EE5DC1 /* NCIDetails.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCIDetails.h; sourceTree = "<group>"; };
@@ -285,6 +288,8 @@
 				2AC7FFA81926BD5000EE5DC1 /* NCIFlowsView.m */,
 				2AC7FFAA1926BD6600EE5DC1 /* NCIAcitvitiesSizesView.h */,
 				2AC7FFAB1926BD6600EE5DC1 /* NCIAcitvitiesSizesView.m */,
+				2AA6782719301BE500AD1C61 /* NCIEndpoint.h */,
+				2AA6782819301BE500AD1C61 /* NCIEndpoint.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -479,6 +484,7 @@
 				2AC7FF9A1926723B00EE5DC1 /* NCIDetails.m in Sources */,
 				2AC7FFCE1926D4F100EE5DC1 /* NCIBtmGraphView.m in Sources */,
 				2AC7FFCB1926D4F100EE5DC1 /* NCIBar.m in Sources */,
+				2AA6782919301BE500AD1C61 /* NCIEndpoint.m in Sources */,
 				2AC7FFD31926D4F100EE5DC1 /* NCISimpleChartView.m in Sources */,
 				2A02D0591844F1BF0065B0E9 /* NCIPeriodSwitcher.m in Sources */,
 				2A02D05A1844F1BF0065B0E9 /* NCIPeriodSwitcherPanel.m in Sources */,

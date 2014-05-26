@@ -10,4 +10,6 @@
 
 @interface NCIFlowsView : UIView
 
+- (void)loadData:(NSArray *) communities;
+
 @end
