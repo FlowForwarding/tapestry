@@ -260,7 +260,7 @@ prop_labels(G)->
     %% together by placing the tail portion of the list in front of the head portion of the list
     random:seed(),
     Vertices = digraph:vertices(G),
-    V = [ Y || {_,Y} <- lists:sort([ {random:uniform(), X} || X <- Vertices ] ) ].
+    V = [ Y || {_,Y} <- lists:sort([ {random:uniform(), X} || X <- Vertices ] ) ],
     %%SplitValue = random:uniform(length(Vertices)),
     %%{V1,V2} = lists:split(SplitValue,Vertices),
     %%V = V2 ++ V1,
